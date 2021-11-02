@@ -1,4 +1,4 @@
-:root {
+.light {
   --container: 1024px;
   --font-size: 16px;
   --borders: 1px;
@@ -14,8 +14,8 @@
   --bg-pop: hsl( 200, 10%, 95% );
   --bg-sink: hsl( 200, 10%, 85% ); }
 
-.dark {
-  --bg: hsl( 200, 10%, 10% );
+:root {
+  --bg: hsl( 200, 10%, 7% );
   --bg-pop: hsl( 200, 10%, 12% );
   --bg-sink: hsl( 200, 10%, 2% );
   --color: hsl( 200, 10%, 90% );
@@ -50,7 +50,7 @@
   --bg-c: hsl( 300, 20%, 20% );
   --bg-d: hsl( 0, 0%, 100%, 0.9 );
   --bg-e: hsl( 300, 20%, 30% );
-  --color-a: hsl( 0, 90%, 75% );
+  --color-a: hsl( 0, 0%, 80% );
   --color-b: hsl( 80, 90%, 75% );
   --color-c: hsl( 160, 90%, 75% );
   --color-d: hsl( 240, 90%, 75% );
@@ -57488,20 +57488,42 @@ a.color-e, select.color-e, button.color-e, .button.color-e {
     flex-basis: 100%;
     max-width: 100%; } }
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
+html .spin, body .spin {
+  animation: spin 2s infinite linear; }
+
+html .rad-and-cool *, body .rad-and-cool * {
+  stroke: transparent;
+  fill: var(--color); }
+
 html .container, body .container {
   user-select: none; }
+
+html .videojs, body .videojs {
+  width: 100%;
+  height: 100%;
+  background: transparent; }
+  html .videojs video, body .videojs video {
+    background: transparent;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0; }
+  html .videojs div, html .videojs button, body .videojs div, body .videojs button {
+    background: transparent;
+    display: none; }
 
 html .maxwidth, body .maxwidth {
   max-width: 1280px; }
 
-html canvas, body canvas {
-  height: 100%;
-  border: 1px solid red;
-  background: black; }
-
-html svg path, body svg path {
-  stroke: transparent;
-  fill: red; }
+html img, body img {
+  background: transparent; }
 
 html *, body * {
   -webkit-user-select: none; }
@@ -57512,8 +57534,7 @@ html #header, body #header {
     padding-left: 6em; }
 
 html img, body img {
-  max-width: 100%;
-  background: black; }
+  max-width: 100%; }
   html img.export, body img.export {
     background: white; }
 

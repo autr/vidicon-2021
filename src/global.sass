@@ -38,32 +38,47 @@
 	background-size: $size * 2 $size * 2
 	background-position: 0 0, $size $size
 
-=pix
+=pix 
 	// background-image: url('pix.png')
 	background-repeat: repeat
 
 html, body 
 
+	@keyframes spin
+		from
+			transform: rotate(0deg)
+		to
+			transform: rotate(360deg)
+
+	.spin
+		animation: spin 2s infinite linear
+
 	$size: 1280px
 	$halfSize: $size/2
+
+	.rad-and-cool
+		*
+			stroke: transparent
+			fill: var(--color)
 
 	.container 
 		user-select: none
   
-
+	.videojs
+		+wh(100%)
+		background: transparent
+		video
+			background: transparent
+			+fill
+		div, button
+			background: transparent
+			display: none
 
 	.maxwidth 
 		max-width: $size
 
-	canvas
-		+h(100%)
-		border: 1px solid red
-		background: black
-
-	svg
-		path
-			stroke: transparent
-			fill: red
+	img 
+		background: transparent
 	*
 		-webkit-user-select: none
 
@@ -76,7 +91,6 @@ html, body
 
 	img
 		max-width: 100%
-		background: black
 		&.export
 			background: white
 	.palette canvas

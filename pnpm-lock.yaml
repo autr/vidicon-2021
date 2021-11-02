@@ -4,6 +4,7 @@ specifiers:
   '@rollup/plugin-commonjs': ^17.0.0
   '@rollup/plugin-node-resolve': ^11.0.0
   csvtojson: ^2.0.10
+  rad-and-cool-icons: link:../rad-and-cool-icons
   rollup: ^2.3.4
   rollup-plugin-css-only: ^3.1.0
   rollup-plugin-livereload: ^2.0.0
@@ -15,6 +16,7 @@ specifiers:
 
 dependencies:
   csvtojson: 2.0.10
+  rad-and-cool-icons: link:../rad-and-cool-icons
   sirv-cli: 1.0.14
   svelte-hammer: 0.1.7
 

@@ -1,6 +1,6 @@
 
 
-:root {
+.light {
 
 	--container: 1024px;
 	--font-size: 16px;
@@ -22,8 +22,8 @@
 	--bg-sink: hsl( 200, 10%, 85% );
 }
 
-.dark {
-	--bg: hsl( 200, 10%, 10% );
+:root {
+	--bg: hsl( 200, 10%, 7% );
 	--bg-pop: hsl( 200, 10%, 12% );
 	--bg-sink: hsl( 200, 10%, 2% );
 
@@ -71,7 +71,7 @@
 	--bg-d: hsl( 0, 0%, 100%, 0.9 );
 	--bg-e: hsl( 300, 20%, 30% );
 
-	--color-a: hsl( 0, 90%, 75% );
+	--color-a: hsl( 0, 0%, 80% );
 	--color-b: hsl( 80, 90%, 75% );
 	--color-c: hsl( 160, 90%, 75% );
 	--color-d: hsl( 240, 90%, 75% );
