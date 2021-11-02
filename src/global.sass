@@ -1,0 +1,124 @@
+@import './_theme'
+@import './../../sassis/src/sassis' 
+@font-face
+	font-family: 'icons'
+	font-style: normal
+	font-weight: 400
+	src: url('icons/MaterialIcons-Regular.eot')
+	src: local('icons'), local('MaterialIcons-Regular'), url('icons/MaterialIcons-Regular.ttf') format('truetype')
+
+.icon
+	font-family: 'icons'
+	font-weight: normal
+	font-style: normal
+	font-size: 18px  /* Preferred icon size */
+	line-height: var(--font-size)
+	display: inline-block
+	text-transform: none
+	letter-spacing: normal
+	word-wrap: normal
+	white-space: nowrap
+	direction: ltr
+	-webkit-font-smoothing: antialiased 
+	text-rendering: optimizeLegibility
+	-moz-osx-font-smoothing: grayscale
+	font-feature-settings: 'liga'
+	+rel
+	+top(0.25em)
+	+left(-0.15em)
+	+pr(0.1em)
+
++sassis
++shorthand
++layout
+
+@mixin checker($size, $color1: rgba(255,255,255,1), $color2: rgba(0,0,0,1))
+	background-color: $color1
+	background-image: linear-gradient(45deg, $color2 25%, transparent 25%, transparent 75%, $color2 75%, $color2 100%), linear-gradient(45deg, $color2 25%, transparent 25%, transparent 75%, $color2 75%, $color2 100%)
+	background-size: $size * 2 $size * 2
+	background-position: 0 0, $size $size
+
+=pix
+	// background-image: url('pix.png')
+	background-repeat: repeat
+
+html, body 
+
+	$size: 1280px
+	$halfSize: $size/2
+
+	.container 
+		user-select: none
+  
+
+
+	.maxwidth 
+		max-width: $size
+
+	canvas
+		+h(100%)
+		border: 1px solid red
+		background: black
+
+	svg
+		path
+			stroke: transparent
+			fill: red
+	*
+		-webkit-user-select: none
+
+	#header
+		-webkit-app-region: drag
+		&.electron
+			// padding: 0.5em
+			padding-left: 6em
+
+
+	img
+		max-width: 100%
+		background: black
+		&.export
+			background: white
+	.palette canvas
+		width: 100%
+		max-width: 100%
+	.file
+		.overlay
+			display: none
+		&:hover
+			.overlay
+				display: flex
+	input, .checker, input[type=range]
+		// +checker(4px, var(--bg), var(--bg-sink))
+		+pix
+		// +bg( var(--bg-sink) )
+		&::-webkit-slider-thumb
+			background-color: var(--bg-pop)
+			// margin-top: -1px
+			// margin-bottom: -1px
+			// margin-left: -1px
+			// margin-right: -1px
+	button, .select
+		+bg( var(--bg-pop) )
+
+	.swatch
+		&.metal
+			background: linear-gradient(140deg, rgba(0,0,0,0) 20%, rgba(255,255,255,0.1) 60%, rgba(0,0,0,0.1) 75%, rgba(255,255,255,0.2) 90%, rgba(0,0,0,0) 120%)
+	.checkered
+		+pix
+	#canvases
+		// +checker(4px, var(--bg), var(--bg-sink))
+		+pix
+		*
+			image-rendering: pixelated
+	.inset
+		// box-shadow: inset 0 0 0 2px var(--color)
+		// outline: inset var(--color) solid 3px
+	.palette-range
+		+checker(4px, var(--bg), var(--bg-sink))
+	canvas
+		// border: 10px solid var(--color) 
+	.grabbable
+		cursor: grab
+		&:active
+			cursor: grabbing
