@@ -1,13 +1,13 @@
-Microsite for [VIDICON](https://vidicon.org) 2021.
+Microsite for [VIDICON](https://vidicon.org) 2021
 
 ## Editing Content
 
-All data is grabbed from the [docs/data](tree/main/docs/data) folder on the fly - which acts as a basic CMS, by editing and commiting those files - which can be done directly within Github.
+All data is grabbed from the [docs/data](/docs/data) folder on the fly - which acts as a basic CMS, by editing and commiting those files - which can be done directly within Github.
 
-* [nav.csv](tree/main/docs/data/nav.csv) - links in top right corner of page
-* [live.csv](tree/main/docs/data/live.csv) - live updated info for each station: *grabbed every 30 seconds inside the microsite*
-* [stations.csv](tree/main/docs/data/stations.csv) - list of stations with properties for m3u8 link and the scanlines chat room name 
-* [play.md](tree/main/docs/data/play.md) - markdown file which is converted into the connect-via-OBS instructions for DIY rooms
+* [nav.csv](/docs/data/nav.csv) - links in top right corner of page
+* [live.csv](/docs/data/live.csv) - live updated info for each station: *grabbed every 30 seconds inside the microsite*
+* [stations.csv](/docs/data/stations.csv) - list of stations with properties for m3u8 link and the scanlines chat room name 
+* [play.md](/docs/data/play.md) - markdown file which is converted into the connect-via-OBS instructions for DIY rooms
 
 **WARNING**
 
