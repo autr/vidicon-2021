@@ -4,6 +4,7 @@ specifiers:
   '@rollup/plugin-commonjs': ^17.0.0
   '@rollup/plugin-node-resolve': ^11.0.0
   csvtojson: ^2.0.10
+  marked: ^4.0.0
   rad-and-cool-icons: link:../rad-and-cool-icons
   rollup: ^2.3.4
   rollup-plugin-css-only: ^3.1.0
@@ -16,6 +17,7 @@ specifiers:
 
 dependencies:
   csvtojson: 2.0.10
+  marked: 4.0.0
   rad-and-cool-icons: link:../rad-and-cool-icons
   sirv-cli: 1.0.14
   svelte-hammer: 0.1.7
@@ -436,6 +438,12 @@ packages:
     dependencies:
       sourcemap-codec: 1.4.8
     dev: true
+
+  /marked/4.0.0:
+    resolution: {integrity: sha512-K3C1JvtiXuXVLoxDQEJP4NMLBuThlTkthgUOCzqLghIpHfis1DIZZfPI3o4UgfFpQ0d+JvTql2h+szR9jQ1p1w==}
+    engines: {node: '>= 12'}
+    hasBin: true
+    dev: false
 
   /merge-stream/2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}

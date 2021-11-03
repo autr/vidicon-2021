@@ -2,36 +2,53 @@
 	import { onMount } from 'svelte'
 	import { FetchData } from './API.js'
 	import Cube from './Cube.svelte'
+	import Chat from './Chat.svelte'
 	import Station from './Station.svelte'
-	import { index, state, data } from './Store.js'
+	import Document from './Document.svelte'
+	import { index, state, data, chat } from './Store.js'
 	export let name;
 
-	const PLAY = 'PLAY'
+
+	const _PLAY = 'PLAY'
+	const _CHAT = 'CHAT'
+	const _NOCHAT = 'NOCHAT'
 
 	onMount( async e => {
-		data.set( await FetchData() )
+		await data.set( await FetchData() )
 		console.log('[App] mounted', $data)
 		$state.data = true
+		$chat = getChat()
 		onHash()
+		$state.hash = true
+		$state.inited = true
 	})
 
+	$: HASHLIST = [...($data?.stations || []).map(s=>s.id),_PLAY,_CHAT]
+
 	function onHash( e ) {
-		$state.inited = true
-		if ($state.hash) return
-		console.log('[App] 🔻  setting index from hash')
+		if (!$state.data) return
 		let id = window.location.hash.substring(1)
-		let st = [...$data.stations.map(s=>s.id),PLAY]
-		let idx = st.indexOf(id)
-		if (idx < 0) idx = 0
+		let idx = HASHLIST.indexOf(id)
+		console.log(`[App] 🔻  setting index from hash ${id} ${idx}`, HASHLIST)
 		index.set(idx)
+	}
+
+	function getChat() {
+		return window.localStorage.getItem(_CHAT) == _CHAT ? true : false 
+	}
+
+	function onToggleChat(e) {
+		let b = $chat ? _NOCHAT : _CHAT
+		window.localStorage.setItem(_CHAT, b)
+		$chat = getChat()
+		console.log(`[App] 💬 toggled chat to ${b} ${$chat}`)
 	}
 
 	let lastIndex = -2
 	$: (_index => {
 		if (!$state.inited || !$state.data || $state.hash || lastIndex == $index) return
-		$state.hash = true
-		console.log('[App] 🔺 setting hash from index')
-		let id = ($index == 5) ? PLAY : $data?.stations?.[$index]?.id 
+		let id = HASHLIST[$index]
+		console.log(`[App] 🔺 setting hash from id ${id} ${$index}`)
 		window.location.hash = id || ''
 		lastIndex = $index
 		setTimeout( e => ($state.hash = false), 10)
@@ -42,45 +59,112 @@
 		Station,
 		Station,
 		Station,
-		Station
+		Station,
+		Document
 	]
+
+	function onOpenChat() {
+
+		window.localStorage.setItem(_CHAT, _NOCHAT)
+		$chat = false
+		window.open('#' + _CHAT, _CHAT, 'directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=no,resizable=no,width=600,height=800')
+	}
+
 
 </script>
 <svelte:window on:hashchange={onHash} />
-<main class="sassis flex column-center-stretch w100vw h100vh plr1 overflow-auto">
-	<div class="flex column-stretch-center maxwidth ptb1 grow w100pc">
-		<header class="flex row-space-between-center monospace maxwidth no-basis grow p1 wrap">
-			<h1 class="flex maxw8em">
-				<a href="#">
-					<img src="vidicon.svg" class="w100pc" />
-					<span class="abs invisible">VIDICON</span>
-				</a>
-			</h1>
+<main class="sassis flex row-center-stretch w100vw h100vh overflow-auto">
 
-			<nav class="flex no-basis grow row-flex-end-center maxwidth f3 monospace ptb1 z-index99">
-				{#each ($data?.stations || []) as link, idx}
-					<a 
-						class="flex"
-						class:bb2-solid={$index == idx}
-						href={'#'+link.id}>{link.title}</a>
-					<span class="block p0-2 mlr0-5 filled radius1em" />
-				{/each}
-				<a 
-					class:bb2-solid={$index == 5}
-					href="#{PLAY}">{PLAY}</a>
-			</nav>
-		</header>
-		<article class="flex grow row-center-center" >
-			<div class="flex flex row-center-center relative b0-solid" >
-				<canvas 
-					width={1280} 
-					height={720} 
-					class="w100pc invisible maxwidth" />
-				<div class="fill flex relative ">
-					<Cube {components} />
-				</div>
+
+	{#if $state.inited && $index <= 5 && $state.data}
+
+		<div class="flex column-center-center p1 grow w100pc">
+			<div class="maxwidth flex column">
+				<header class="flex row-space-between-center monospace maxwidth no-basis grow ptb1 wrap">
+					<h1 class="flex maxw8em row-flex-start-center">
+						<a href="#">
+							<img src="vidicon.svg" class="w100pc" />
+							<span class="abs invisible">VIDICON</span>
+						</a>
+					</h1>
+
+					<nav class="flex no-basis grow row-flex-end-center maxwidth f3 monospace ptb1 z-index99">
+						{#each ($data?.nav || []) as link, idx}
+							<a 
+								class="unclickable block whitespace-nowrap"
+								target={link.url[0] == '#' ? '' : '_blank'}
+								href={link.url}>{link.title}</a>
+							<span class="block p0-2 mlr0-5 filled radius1em" />
+						{/each}
+						<div 
+							class="pointer clickable b2-solid plr1"
+							class:filled={$chat}
+							on:click={onToggleChat}>{_CHAT}</div>
+					</nav>
+				</header>
+				<article class="flex grow row-center-center" >
+
+						<!-- style={$index < 0 ? 'background:blue' : ''} -->
+					<div 
+						class="flex flex row-center-center relative b0-solid" >
+						<canvas 
+							width={1280} 
+							height={720} 
+							class="w100pc invisible maxwidth" />
+						<div class="fill flex relative ">
+							<Cube {components} />
+						</div>
+					</div>
+				</article>
+
+				<footer class="flex no-basis grow row-space-between-center maxwidth f3 monospace ptb1 z-index99">
+					<div class="flex row-flex-start-center">
+						{#each ($data?.stations || []) as link, idx}
+							<a 
+								class="unclickable block whitespace-nowrap"
+								class:bb4-solid={$index == idx}
+								href={'#'+link.id}>{link.title}</a>
+							<span class="block p0-2 mlr0-5 filled radius1em" />
+						{/each}
+						<a 
+							class="unclickable"
+							class:bb2-solid={$index == 5}
+							href="#{_PLAY}">{_PLAY}</a>
+					</div>
+					<div>
+					</div>
+				</footer>
 			</div>
-		</article>
-	</div>
+		</div>
+
+	{/if}
+
+	{#if $chat || $index == 6}
+		<div 
+			class:maxw56em={ $index < 6 }
+			class:bl2-solid={ $index < 6 }
+			class="flex grow  column" 
+			style="transform: skew(0deg, -0deg)">
+			<Chat>
+
+				<div 
+					class="flex row-center-center">
+					<div
+						class:none={ $index >= 6 }
+						on:click={onOpenChat}
+						class="pointer">
+						<svg 
+						class="w2em overflow-hidden h3em rel t0-2 ml1"
+						xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="356.58914728682174" viewBox="0, 0, 400,356.58914728682174"><g id="svgg"><path id="path0" d="M265.116 20.547 C 265.116 20.763,272.640 28.462,281.835 37.657 L 298.553 54.376 248.501 104.707 C 220.973 132.389,198.450 155.312,198.450 155.646 C 198.450 156.682,224.636 182.171,225.700 182.171 C 226.253 182.171,249.048 159.845,276.357 132.558 C 303.665 105.271,326.259 82.946,326.566 82.946 C 326.872 82.946,334.623 90.446,343.790 99.612 C 352.956 108.779,360.633 116.279,360.848 116.279 C 361.064 116.279,361.240 94.651,361.240 68.217 L 361.240 20.155 313.178 20.155 C 286.744 20.155,265.116 20.331,265.116 20.547 M51.163 194.574 L 51.163 330.233 186.822 330.233 L 322.481 330.233 322.481 252.713 L 322.481 175.194 303.101 175.194 L 283.721 175.194 283.721 233.333 L 283.721 291.473 186.822 291.473 L 89.922 291.473 89.922 194.574 L 89.922 97.674 148.062 97.674 L 206.202 97.674 206.202 78.295 L 206.202 58.915 128.682 58.915 L 51.163 58.915 51.163 194.574 " stroke="none" fill="var(--color)" fill-rule="evenodd"></path></g></svg>
+					</div>
+					<img
+						class:none={ $index < 6 }
+						src="vidicon.svg" 
+						class="maxw6em minw6em ml1 w100pc h100pc" />
+				</div>
+			</Chat>
+		</div>
+	{/if}
+
 </main>
 

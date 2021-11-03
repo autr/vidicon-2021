@@ -15,14 +15,15 @@
 	let origin = {...current}
 	let destination = {...current}
 	let el, width, height // element dimensions
-	let zoomX = 1
+	let zoomX = 2
 	let zoomY = 1
 	let zoomZ = 1
 	let isTweening = false
 
 	const HORIZONTAL = 'horizontal'
 	const VERTICAL = 'vertical'
-	const BOTH = 'voth'
+	const BOTH = 'both'
+	const SIDEWAYS = 'sideways'
 
 	let DEBUG = false
 
@@ -30,6 +31,7 @@
 	onMount( e => {
 		onResize()
 		window.requestAnimationFrame(tick)
+		current.y = 45
 	})
 
 	function clamp( v, min, max ) {
@@ -51,10 +53,12 @@
 
 	$: (_index => {
 
-		if (!$state.inited || (lastIndex == $index && !$state.panend) ) return
+		if (!$state.inited || (lastIndex == $index ) ) return
 
-		$smoothing = $state.panning ? 0.9 : 0.92
+		// SPIN!!!!
+
 		isTweening = true
+		$smoothing = $state.panning ? 0.9 : 0.97
 
 		// 45 - 225
 		current.x = normalise(current.x, 360)
@@ -64,10 +68,7 @@
 		origin.y = destination.y
 
 		let top = { 5: 90, 0: -90 }
-		if (current.x > 45 && current.x < 225) {
-			top = { 5: -90, 0: 90 }
-			console.log('SWAPPED')
-		}
+		if (current.x > 45 && current.x < 225) top = { 5: -90, 0: 90 }
 
 		let x = !top[$index] ? ($index-1) * 90 : destination.x
 		let y = top[$index] || 0
@@ -92,11 +93,43 @@
 		destination.x = x
 		destination.y = y
 
+
+		// if ($index < 0 ) {
+		// 	destination.y -= 45
+		// 	destination.x += 180 - 45
+		// }
+
+
 		if (!$state.cubeInited) {
 			current.x = destination.x
 			current.y = destination.y
 			$state.cubeInited = true
 		}
+
+
+		// BAD
+		// 180
+		// -90
+
+		// 180
+		// -90
+
+		// GOOD
+
+		// -90
+		// 0
+
+		// 270
+		// -90
+
+		if (destination.x == 180 && destination.y == -90 && $index == 0) {
+			destination.y += 180
+		}
+
+		if (destination.x == 180 && destination.y == 90 && $index == 5) {
+			destination.y -= 180
+		}
+
 
 		lastIndex = $index
 		$state.panend = false
@@ -122,6 +155,22 @@
 	$: ends = isEnds($index)
 
 	function tick() {
+
+
+		// SPIN
+
+		if ($index < 0) {
+			zoomX = blend(zoomX, 2, $smoothing)
+			zoomY = blend(zoomY, 2, $smoothing)
+			zoomZ = blend(zoomZ, 1, $smoothing)
+			let sp = 0.03
+			current.x -= sp * 1.8
+			// current.y -= sp * 1
+			return window.requestAnimationFrame( tick )
+			
+		}
+
+		// MAIN
 
 		let x = Math.abs(origin.x - current.x)
 		let y = Math.abs(origin.y - current.y)
@@ -178,7 +227,6 @@
 					console.log(`[Cube] 🧊 TWEEN FINISHED: triggering ${$index}`)
 
 					trigger.set($index)
-					
 
 					isTweening = false
 				}
@@ -198,7 +246,11 @@
 
 		let {deltaX, deltaY} = e.detail
 
+
+
 		$state.direction = (Math.abs(deltaX) > Math.abs(deltaY)) ? HORIZONTAL : VERTICAL
+		if ($index == 0 || $index == 5) $state.direction = VERTICAL
+		if ($index < 0) $state.direction = BOTH
 
 		$state.panning = true
 		width = el.offsetWidth
@@ -222,13 +274,13 @@
 
 		// HORIZONTAL
 
-		if ($state.direction == HORIZONTAL) {
+		if ($state.direction == HORIZONTAL || $state.direction == BOTH ) {
 			current.x = (rotation.x + (90 * x))%360
 		}
 
 		// VERTICAL
 
-		if ($state.direction == VERTICAL) {
+		if ($state.direction == VERTICAL || $state.direction == BOTH ) {
 			current.y = (rotation.y - (90 * y))%360
 
 			// BOUNCE...
@@ -237,7 +289,11 @@
 			if (current.y < -90) current.y -= ((current.y + 90) * (Math.abs(deltaY) * 0.005))
 		}
 
-		console.log( normalise(current.x, 360) )
+		if ($state.direction == BOTH) {
+			current.x = normalise(current.x,180)
+			current.y = normalise(current.y,180)
+		}
+
 	}
 
 	function normalise( value, angle ) {
@@ -256,11 +312,11 @@
 		let xIndex = (( normX - (normX%90) ) / 90) + 1
 
 
-		if ($state.direction == HORIZONTAL) {
+		// if ($index < 0) {
 
-			$index = xIndex
+		// 	$index = 0
 
-		} else {
+		// } else {
 
 			let normY = normalise(current.y + 45,360)
 			let adj = scale(normY - (normY%90),90,270,-1,1)
@@ -277,14 +333,10 @@
 
 			if (TOPS !== undefined) $index = TOPS
 
-			console.log( 'A ---------->', xIndex, TOPS, $index)
-			console.log( 'B ---------->', xIndex, current)
-			console.log( 'C ---------->', xIndex, destination)
-
 			// 2
 			// 3
 
-		}
+		// }
 
 		$smoothing = 0.9
 		isTweening = true
@@ -337,10 +389,10 @@
 	$: modX = (scale(Math.abs((Math.abs(current.x)%180)-90),0,45,1,0)+1)/2
 	$: modY = (scale(Math.abs((Math.abs(current.y)%180)-90),0,45,1,0)+1)/2
 
-	$: zoom = scale(width,500,1000,0.75,0.5) + ((zoomX - 1)*-0.1) + ((zoomY - 1)*-0.1)  + ((zoomZ - 1)*zoomRatio) 
+	$: zoom = scale(width,500,1000,0.75,0.5) + ((zoomX - 1)*-0.04) + ((zoomY - 1)*-0.02)  + ((zoomZ - 1)*zoomRatio) 
 	$: zoomRatio = (width / 1000) * (2 - (width/height))
 
-	$: perspective = 1000 + ((zoomX - 1)*1000) + ((zoomY - 1)*1000) 
+	$: perspective = 1000 + ((zoomX - 1)*600) + ((zoomY - 1)*600) 
 	//9999999 !!!
 
 
@@ -407,7 +459,7 @@
 	on:panstart={onPanstart}
 	on:panmove={onPanmove}
 	on:panend={onPanend} />
-<span class="filled fixed t0 r0 p1">{$index}</span>
+<!-- <span class="filled fixed t0 r0 p1">{$index}</span> -->
 
 <div 
 	class="zoom fill" 

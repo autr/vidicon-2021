@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "csvtojson": "^2.0.10",
+    "marked": "^4.0.0",
     "rad-and-cool-icons": "link:../rad-and-cool-icons",
     "sirv-cli": "^1.0.0",
     "svelte-hammer": "^0.1.7"
