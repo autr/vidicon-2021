@@ -5,6 +5,21 @@ let data
 let sources = ['nav', 'stations']
 let documents = ['play']
 
+export const FetchLiveInfo = async e => {
+
+	const url = `data/live.csv?time=${parseInt((new Date())/1000)}`
+	try {
+		let data = await CsvToJson().fromString( await (await fetch(url)).text() )
+		console.log(`[API] 🍄  grabbed live info ${url}`)
+		return data
+	} catch(err) {
+		let message = `error grabbing ${url}! ${err.message}`
+		console.log(`[API] ❌  ${message}`)
+		alert(message)
+		return null
+	}
+}
+
 export const FetchData = async e => {
 	let w = window
 	if (!w.data) {

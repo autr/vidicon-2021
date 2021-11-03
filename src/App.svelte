@@ -1,11 +1,11 @@
 <script>
 	import { onMount } from 'svelte'
-	import { FetchData } from './API.js'
+	import { FetchData, FetchLiveInfo } from './API.js'
 	import Cube from './Cube.svelte'
 	import Chat from './Chat.svelte'
 	import Station from './Station.svelte'
 	import Document from './Document.svelte'
-	import { index, state, data, chat } from './Store.js'
+	import { index, state, data, chat, live } from './Store.js'
 	export let name;
 
 
@@ -13,24 +13,31 @@
 	const _CHAT = 'CHAT'
 	const _NOCHAT = 'NOCHAT'
 
+	let HASH
+
+
 	onMount( async e => {
 		await data.set( await FetchData() )
-		console.log('[App] mounted', $data)
+		console.log('[App] mounted')
 		$state.data = true
 		$chat = getChat()
 		onHash()
 		$state.hash = true
 		$state.inited = true
+
+		getLiveInfo()
 	})
 
 	$: HASHLIST = [...($data?.stations || []).map(s=>s.id),_PLAY,_CHAT]
 
 	function onHash( e ) {
 		if (!$state.data) return
-		let id = window.location.hash.substring(1)
-		let idx = HASHLIST.indexOf(id)
-		console.log(`[App] 🔻  setting index from hash ${id} ${idx}`, HASHLIST)
+		HASH = window.location.hash.substring(1)
+		let idx = HASHLIST.indexOf(HASH)
+		console.log(`[App] 🔻  setting index from hash ${HASH} ${idx}`)
 		index.set(idx)
+
+		console.log($live, HASH, '???')
 	}
 
 	function getChat() {
@@ -44,15 +51,26 @@
 		console.log(`[App] 💬 toggled chat to ${b} ${$chat}`)
 	}
 
+	let dontHashUpdate = false
 	let lastIndex = -2
 	$: (_index => {
-		if (!$state.inited || !$state.data || $state.hash || lastIndex == $index) return
+		if (!$state.inited || !$state.data  || lastIndex == $index) return
 		let id = HASHLIST[$index]
 		console.log(`[App] 🔺 setting hash from id ${id} ${$index}`)
 		window.location.hash = id || ''
 		lastIndex = $index
 		setTimeout( e => ($state.hash = false), 10)
 	})($index)
+
+	async function getLiveInfo() {
+		if ($index < 6) {
+			let _live = await FetchLiveInfo()
+			if (_live) $live = window.live = _live
+		}
+		setTimeout(getLiveInfo, 1000 * 5)
+	}
+
+	$: LIVE = ($live || []).find( l => (l.id == HASH) )?.message || ''
 
 	let components = [
 		Station,
@@ -118,7 +136,7 @@
 				</article>
 
 				<footer class="flex no-basis grow row-space-between-center maxwidth f3 monospace ptb1 z-index99">
-					<div class="flex row-flex-start-center">
+					<div class="flex row-flex-start-center whitespace-nowrap">
 						{#each ($data?.stations || []) as link, idx}
 							<a 
 								class="unclickable block whitespace-nowrap"
@@ -127,11 +145,12 @@
 							<span class="block p0-2 mlr0-5 filled radius1em" />
 						{/each}
 						<a 
-							class="unclickable"
+							class="unclickable whitespace-nowrap"
 							class:bb2-solid={$index == 5}
 							href="#{_PLAY}">{_PLAY}</a>
 					</div>
 					<div>
+						{LIVE}
 					</div>
 				</footer>
 			</div>

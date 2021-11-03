@@ -1,13 +1,19 @@
 <script>
-	import { index, state, smoothing, trigger } from './Store.js'
+	import { index, state, smoothing, trigger, volume } from './Store.js'
 	import { onMount } from 'svelte'
 	import { pan } from 'svelte-hammer'
 	import { tweened } from 'svelte/motion'
 	import { cubicOut, cubicIn } from 'svelte/easing'
 
-	export let backspace = false
-	export let spin = false
 
+
+
+	let DEBUG = false
+
+
+
+	export let backspace = true
+	export let spin = false
 	export let components = []
 
 	let rotation = {x:0,y:0,z:0}
@@ -19,13 +25,13 @@
 	let zoomY = 1
 	let zoomZ = 1
 	let isTweening = false
+	let isPanning = false
 
 	const HORIZONTAL = 'horizontal'
 	const VERTICAL = 'vertical'
 	const BOTH = 'both'
 	const SIDEWAYS = 'sideways'
 
-	let DEBUG = false
 
 
 	onMount( e => {
@@ -58,7 +64,7 @@
 		// SPIN!!!!
 
 		isTweening = true
-		$smoothing = $state.panning ? 0.9 : 0.97
+		$smoothing = isPanning ? 0.9 : 0.97
 
 		// 45 - 225
 		current.x = normalise(current.x, 360)
@@ -186,7 +192,7 @@
 			if (zz != zoomZ ) zoomZ = ends ? zz : 1
 		}
 
-		if ($state.panning) {
+		if (isPanning) {
 
 
 		} else {
@@ -229,6 +235,7 @@
 					trigger.set($index)
 
 					isTweening = false
+					volume.set(1)
 				}
 			}
 
@@ -252,7 +259,7 @@
 		if ($index == 0 || $index == 5) $state.direction = VERTICAL
 		if ($index < 0) $state.direction = BOTH
 
-		$state.panning = true
+		isPanning = true
 		width = el.offsetWidth
 		height = el.offsetHeight
 		rotation.x = current.x
@@ -340,7 +347,9 @@
 
 		$smoothing = 0.9
 		isTweening = true
-		$state.panning = false
+		isPanning = false
+
+		volume.set(1)
 
 		
 	}
@@ -404,6 +413,12 @@
 		console.log(`[Cube] 📐 width and height ${width} ${height}`)
 	}
 
+	$: (_modX => {
+		if (isTweening || isPanning) {
+			volume.set(modX)
+		}
+	})(modX)
+
 
 							// style={`
 							// 	${ isEnds(i) ? `
@@ -421,7 +436,7 @@
 							// `}
 </script>
 {#if DEBUG}
-	<span class="fixed r0 t0 z-index9 r0 flex column f2">
+	<span class="fixed r0 t0 z-index9 r0 flex column filled p1">
 		<h1>{$index}</h1>
 		<span>current.x:{current.x.toFixed(2)}</span>
 		<span>current.y:{current.y.toFixed(2)}</span>
