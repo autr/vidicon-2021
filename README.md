@@ -39,6 +39,7 @@ id, name, message, url
 * [video.js](https://docs.videojs.com/docs/api/player.html) HLS component is used for m3u8 streams, and defaults to a testcard m3u8 stream if none is set in `stations.csv`
 * video players are `undefined` until a tween animation is completed, and each subsequent video player is loaded on demand to reduce uneccesary memory use
 * variable for toggling chat is stored in `window.localStorage('CHAT')`
+* debugger overlays can be viewed by adding `?debug` as an url parameter string
 
 # License
 

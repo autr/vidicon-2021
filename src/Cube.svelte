@@ -8,7 +8,7 @@
 
 
 
-	let DEBUG = false
+	let DEBUG = window.location.search == '?debug'
 
 
 
@@ -33,11 +33,13 @@
 	const SIDEWAYS = 'sideways'
 
 
+	let DIMIT
 
 	onMount( e => {
 		onResize()
 		window.requestAnimationFrame(tick)
-		current.y = 45
+		current.x += parseInt(Math.random() * 4) * 90
+		// current.y = 45
 	})
 
 	function clamp( v, min, max ) {
@@ -64,7 +66,6 @@
 		// SPIN!!!!
 
 		isTweening = true
-		$smoothing = isPanning ? 0.9 : 0.97
 
 		// 45 - 225
 		current.x = normalise(current.x, 360)
@@ -93,17 +94,8 @@
 		if (x == 0 && current.x > 180) current.x = normalise(current.x, 180)
 		if (x == 360 && current.x < 180) current.x += 360
 
-		// console.log('B', current.x, destination.x, x)
-
-
 		destination.x = x
 		destination.y = y
-
-
-		// if ($index < 0 ) {
-		// 	destination.y -= 45
-		// 	destination.x += 180 - 45
-		// }
 
 
 		if (!$state.cubeInited) {
@@ -112,20 +104,6 @@
 			$state.cubeInited = true
 		}
 
-
-		// BAD
-		// 180
-		// -90
-
-		// 180
-		// -90
-
-		// GOOD
-
-		// -90
-		// 0
-
-		// 270
 		// -90
 
 		if (destination.x == 180 && destination.y == -90 && $index == 0) {
@@ -166,8 +144,8 @@
 		// SPIN
 
 		if ($index < 0) {
-			zoomX = blend(zoomX, 2, $smoothing)
-			zoomY = blend(zoomY, 2, $smoothing)
+			zoomX = blend(zoomX, 1.5, $smoothing)
+			zoomY = blend(zoomY, 1.5, $smoothing)
 			zoomZ = blend(zoomZ, 1, $smoothing)
 			let sp = 0.03
 			current.x -= sp * 1.8
@@ -178,9 +156,11 @@
 
 		// MAIN
 
-		let x = Math.abs(origin.x - current.x)
-		let y = Math.abs(origin.y - current.y)
-		let combi = x+y
+		let x = Math.abs(normalise(origin.x,180) - normalise(current.x,180))
+		let y = Math.abs(normalise(origin.y,180) - normalise(current.y,180))
+		let combi = (x+y)%360
+
+		// if (combi > 315) combi = Math.abs(combi - 360)
 
 		if (combi <= 45) {
 			let zx = clamp(scale(x,0,45,1,2),1,2)
@@ -257,7 +237,9 @@
 
 		$state.direction = (Math.abs(deltaX) > Math.abs(deltaY)) ? HORIZONTAL : VERTICAL
 		if ($index == 0 || $index == 5) $state.direction = VERTICAL
-		if ($index < 0) $state.direction = BOTH
+		$state.direction = BOTH
+		DIMIT = ($index == 0 || $index == 5) ? 0.5 : 1
+		// if ($index < 0) $state.direction = BOTH
 
 		isPanning = true
 		width = el.offsetWidth
@@ -275,7 +257,9 @@
 		let speed = 2
 
 		let x = (deltaX * speed * 1.5) / width
-		let y = (deltaY * speed * 1) / height
+		let y = (Math.round(deltaY) * speed * 1 ) / height
+
+		// invert
 
 		if (destination.x >= 90 && destination.x <= 180) y *= -1
 
@@ -292,8 +276,8 @@
 
 			// BOUNCE...
 
-			if (current.y > 90) current.y -= ((current.y - 90) * (Math.abs(deltaY) * 0.005))
-			if (current.y < -90) current.y -= ((current.y + 90) * (Math.abs(deltaY) * 0.005))
+			// if (current.y > 90) current.y -= ((current.y - 90) * (Math.abs(deltaY) * 0.005))
+			// if (current.y < -90) current.y -= ((current.y + 90) * (Math.abs(deltaY) * 0.005))
 		}
 
 		if ($state.direction == BOTH) {
@@ -305,13 +289,22 @@
 
 	function normalise( value, angle ) {
 		if (value < 360 - angle) value += 360
-		if (value > angle) value -= 360
+		if (value >= angle) value -= 360
 		return value
 	}
 
 	function onPanend(e) {
 
 		// console.log('[Cube] 🧊  panend')
+
+		if (origin.x == -destination.x) destination.x += 360
+		if (origin.y == -destination.y) destination.y += 360
+
+		current.x = normalise(current.x,180)
+		current.y = normalise(current.y,180)
+		destination.x = normalise(destination.x,180)
+		destination.y = normalise(destination.y,180)
+
 
 		$state.panend = true
 
@@ -398,10 +391,10 @@
 	$: modX = (scale(Math.abs((Math.abs(current.x)%180)-90),0,45,1,0)+1)/2
 	$: modY = (scale(Math.abs((Math.abs(current.y)%180)-90),0,45,1,0)+1)/2
 
-	$: zoom = scale(width,500,1000,0.75,0.5) + ((zoomX - 1)*-0.04) + ((zoomY - 1)*-0.02)  + ((zoomZ - 1)*zoomRatio) 
+	$: zoom = scale(width,500,1000,0.75,0.5) + ((zoomX - 1)*-0.08) + ((zoomY - 1)*-0.06)  + ((zoomZ - 1) * zoomRatio) 
 	$: zoomRatio = (width / 1000) * (2 - (width/height))
 
-	$: perspective = 1000 + ((zoomX - 1)*600) + ((zoomY - 1)*600) 
+	$: perspective = parseInt(1000 + ((zoomX - 1)*600) + ((zoomY - 1)*600))
 	//9999999 !!!
 
 
@@ -415,7 +408,7 @@
 
 	$: (_modX => {
 		if (isTweening || isPanning) {
-			volume.set(modX)
+			volume.set( ($index == 1 || $index == 3) ? 1 - modX : modX)
 		}
 	})(modX)
 
@@ -436,8 +429,8 @@
 							// `}
 </script>
 {#if DEBUG}
-	<span class="fixed r0 t0 z-index9 r0 flex column filled p1">
-		<h1>{$index}</h1>
+	<span class="fixed r0 t0 z-index9 r0 flex column filled p1 monospace">
+		<span>index:{$index}</span>
 		<span>current.x:{current.x.toFixed(2)}</span>
 		<span>current.y:{current.y.toFixed(2)}</span>
 		<span>current.z:{current.z.toFixed(2)}</span>
@@ -456,9 +449,11 @@
 		<span>height:{parseInt(height)}</span>
 		<span>index:{$index}</span>
 		<span>zoom:{zoom.toFixed(2)}</span>
+		<span>perspective:{parseInt(perspective)}</span>
 		<span>zoomX:{zoomX.toFixed(2)}</span>
 		<span>zoomY:{zoomY.toFixed(2)}</span>
 		<span>zoomZ:{zoomZ.toFixed(2)}</span>
+		<span>zoomRatio:{zoomRatio.toFixed(2)}</span>
 	</span>
 {/if}
 <!-- <span
@@ -476,6 +471,19 @@
 	on:panend={onPanend} />
 <!-- <span class="filled fixed t0 r0 p1">{$index}</span> -->
 
+<!-- <div class="abs b3 mb3 w100pc flex row-center-center">
+<svg class="w4em" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 485 485" style="enable-background:new 0 0 485 485;" xml:space="preserve">
+	<path fill="var(--color)" d="M382.5,69.429c-7.441,0-14.5,1.646-20.852,4.573c-4.309-23.218-24.7-40.859-49.148-40.859
+		c-7.68,0-14.958,1.744-21.467,4.852C285.641,16.205,265.932,0,242.5,0c-23.432,0-43.141,16.206-48.533,37.995
+		c-6.508-3.107-13.787-4.852-21.467-4.852c-27.57,0-50,22.43-50,50v122.222c-6.129-2.686-12.891-4.187-20-4.187
+		c-27.57,0-50,22.43-50,50V354c0,72.233,58.766,131,131,131h118c72.233,0,131-58.767,131-131V119.429
+		C432.5,91.858,410.07,69.429,382.5,69.429z M402.5,354c0,55.691-45.309,101-101,101h-118c-55.691,0-101-45.309-101-101V251.178
+		c0-11.028,8.972-20,20-20s20,8.972,20,20v80h30V83.143c0-11.028,8.972-20,20-20s20,8.972,20,20v158.035h30V50
+		c0-11.028,8.972-20,20-20c11.028,0,20,8.972,20,20v191.178h30V83.143c0-11.028,8.972-20,20-20s20,8.972,20,20v158.035h30v-121.75
+		c0-11.028,8.972-20,20-20s20,8.972,20,20V354z"/>
+</div> -->
+
 <div 
 	class="zoom fill" 
 	class:invisible={!$state.cubeInited}
@@ -489,9 +497,12 @@
 			class="box h100pc rel">
 			<!-- <div class="face-extra fill flex b2-solid" -->
 			{#each (new Array(6)) as n, i }
-				<!-- <span 
-					style={faces[i]}
-					class="borders fill flex b2-solid" /> -->
+				<div 
+					style={faces[i]} 
+					class:none={i != $index}
+					class:b8-solid={$state.mousedown}
+					class:b4-solid={!$state.mousedown}
+					class="face fill flex row-center-center fuzz" />
 				<div 
 					style={faces[i] + rotateStyle(i) }
 					class="face fill flex row-center-center">
@@ -508,7 +519,7 @@
 								<div class="flex column-center-center">
 									<h1 class="filled plr1">COMPONENT {i}</h1>
 									<div class="filled plr1">HELLO WORLD</div>
-									<!-- <img src="data/demo{i+1}.png" class="w30pc" /> -->
+									<img src="data/demo{i+1}.png" class="w30pc" />
 								</div>
 							{/if}
 						</div>

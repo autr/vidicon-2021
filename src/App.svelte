@@ -5,7 +5,7 @@
 	import Chat from './Chat.svelte'
 	import Station from './Station.svelte'
 	import Document from './Document.svelte'
-	import { index, state, data, chat, live } from './Store.js'
+	import { index, state, data, chat, live, smoothing } from './Store.js'
 	export let name;
 
 
@@ -36,8 +36,6 @@
 		let idx = HASHLIST.indexOf(HASH)
 		console.log(`[App] 🔻  setting index from hash ${HASH} ${idx}`)
 		index.set(idx)
-
-		console.log($live, HASH, '???')
 	}
 
 	function getChat() {
@@ -100,7 +98,9 @@
 			<div class="maxwidth flex column">
 				<header class="flex row-space-between-center monospace maxwidth no-basis grow ptb1 wrap">
 					<h1 class="flex maxw8em row-flex-start-center">
-						<a href="#">
+						<a 
+							on:click={e => ($smoothing = 0.9)}
+							href="#">
 							<img src="vidicon.svg" class="w100pc" />
 							<span class="abs invisible">VIDICON</span>
 						</a>
@@ -110,26 +110,28 @@
 						{#each ($data?.nav || []) as link, idx}
 							<a 
 								class="unclickable block whitespace-nowrap"
-								target={link.url[0] == '#' ? '' : '_blank'}
-								href={link.url}>{link.title}</a>
+								target={link?.url?.[0] == '#' ? '' : '_blank'}
+								href={link?.url}>{link?.title}</a>
 							<span class="block p0-2 mlr0-5 filled radius1em" />
 						{/each}
 						<div 
-							class="pointer clickable b2-solid plr1"
+							class="pointer clickable b2-solid plr1"f
 							class:filled={$chat}
 							on:click={onToggleChat}>{_CHAT}</div>
 					</nav>
 				</header>
 				<article class="flex grow row-center-center" >
 
-						<!-- style={$index < 0 ? 'background:blue' : ''} -->
 					<div 
 						class="flex flex row-center-center relative b0-solid" >
 						<canvas 
 							width={1280} 
 							height={720} 
 							class="w100pc invisible maxwidth" />
-						<div class="fill flex relative ">
+						<div 
+							on:mousedown={ e => ($state.mousedown = true)}
+							on:mouseup={ e => ($state.mousedown = false)}
+							class="cube fill flex relative grabbable">
 							<Cube {components} />
 						</div>
 					</div>
@@ -137,17 +139,21 @@
 
 				<footer class="flex no-basis grow row-space-between-center maxwidth f3 monospace ptb1 z-index99">
 					<div class="flex row-flex-start-center whitespace-nowrap">
-						{#each ($data?.stations || []) as link, idx}
+						{#each [...($data?.stations || []), { id: _PLAY, title: _PLAY}] as link, idx}
+							{#if idx != 0}
+								<span class="block p0-2 mlr0-5 filled radius1em" />
+							{/if}
 							<a 
+								on:click={e => ($smoothing = 0)}
 								class="unclickable block whitespace-nowrap"
 								class:bb4-solid={$index == idx}
-								href={'#'+link.id}>{link.title}</a>
-							<span class="block p0-2 mlr0-5 filled radius1em" />
+								href={'#'+link?.id}>{link?.title}</a>
 						{/each}
-						<a 
+						<!-- <a 
+							on:click={e => ($smoothing = 0)}
 							class="unclickable whitespace-nowrap"
 							class:bb2-solid={$index == 5}
-							href="#{_PLAY}">{_PLAY}</a>
+							href="#{_PLAY}">{_PLAY}</a> -->
 					</div>
 					<div>
 						{LIVE}

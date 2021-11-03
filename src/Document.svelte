@@ -47,8 +47,5 @@
 				PLAY
 			</h1>
 		</div>
-		<div 
-			class="fill flex column-center-center b4-solid" 
-			style="transition: transform 0s ease; background:blue;transform: scale(1, {idx != $index? 0 : 1}" />
 	</div>
 </section>

@@ -1,14 +1,14 @@
 <script>
 	import { onMount } from 'svelte'
 	import { All } from 'rad-and-cool-icons'
-	import { data, index, state, trigger, volume } from './Store.js'
+	import { data, index, state, trigger, volume, live } from './Store.js'
 
 	export let idx 
 	export let width
 	export let height
 	export let stretch
 
-	let DEBUG = true
+	let DEBUG = window.location.search == '?debug'
 	let VIDEO_JS = true // DEBUG
 
 	let ready = false
@@ -28,7 +28,8 @@
 	$: title = station?.title || 'No title'
 	$: src = station?.src || SRC
 	$: poster = station?.poster || `data/demo${idx+1}.png`
-	$: live = $data?.live?.[id]
+
+	$: LIVE = ($live || []).find( l => (l.id == id) )?.message || ''
 
 	let el, player
 
@@ -167,7 +168,6 @@
 	$: (_vol => {
 		if (!player ) return
 		if (player.volume() == $volume) return
-		// console.log('VOL!', $volume, id)
 		player.volume($volume)
 	})($volume)
 
@@ -226,7 +226,8 @@
 	class="fill flex row-center-center ">
 	<div 
 		class="flex column-stretch-center grow"
-		class:b2-solid={!stretch}
+		class:b8-solid={$state.mousedown && !stretch}
+		class:b4-solid={!$state.mousedown && !stretch}
 		style="height:{height}px;transform:scale(1,{stretch ? width/height : 1});">
 		<span class:none={!DEBUG || (DEBUG && idx != $index) } class="minw16em filled abs t0 r0 p1 z-index99 flex column">
 			<!-- <span class="filled bb2-solid flex">debug</span> -->
@@ -269,16 +270,16 @@
 		</div>
 		<div 
 			class:none={status==_PLAYING || idx == $index}
-			class="flex row-center-center z-index99">
-			<h1 
-				class="filled plr1 ptb0" 
-				style="font-size:6em">
-				{title}
-			</h1>
+			class="flex column-center-center z-index99 p2">
+			<div class="filled flex column-center-center mb2 maxw50pc">
+				<h1 
+					class="filled plr0-5 ptb0" 
+					style="font-size:6em">
+					{title}
+				</h1>
+				<div class="filled f5 plr1 ptb0-5">{LIVE}</div>
+			</div>
 		</div>
-		<div 
-			class="fill flex column-center-center b4-solid" 
-			style="transition: transform 0s ease; background:blue;transform: scale(1, {idx != $index? 0 : 1}" />
 		<div 
 			class="fill"
 			class:block={status==_PLAYING}

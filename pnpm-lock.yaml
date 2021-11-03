@@ -5,6 +5,7 @@ specifiers:
   '@rollup/plugin-node-resolve': ^11.0.0
   csvtojson: ^2.0.10
   marked: ^4.0.0
+  quaternion: ^1.2.1
   rad-and-cool-icons: link:../rad-and-cool-icons
   rollup: ^2.3.4
   rollup-plugin-css-only: ^3.1.0
@@ -18,6 +19,7 @@ specifiers:
 dependencies:
   csvtojson: 2.0.10
   marked: 4.0.0
+  quaternion: 1.2.1
   rad-and-cool-icons: link:../rad-and-cool-icons
   sirv-cli: 1.0.14
   svelte-hammer: 0.1.7
@@ -494,6 +496,10 @@ packages:
     resolution: {integrity: sha512-lY1Q/PiJGC2zOv/z391WOTD+Z02bCgsFfvxoXXf6h7kv9o+WmsmzYqrAwY63sNgOxE4xEdq0WyUnXfKeBrSvYw==}
     engines: {node: '>=8.6'}
     dev: true
+
+  /quaternion/1.2.1:
+    resolution: {integrity: sha512-w5K58QTWq0ynVkLtYO3epGXFA9YBB+3qCi1N0mAezb+12voKswIRgpPQ+RnOQlwsJvHohqFud4NawfeR2vIeFg==}
+    dev: false
 
   /randombytes/2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
