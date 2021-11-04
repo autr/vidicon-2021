@@ -264,6 +264,7 @@
 			</span>
 			<span 
 				on:click={openFullscreen}
+				class:hide={$state.isTweening || $state.isPanning}
 				class="block pointer p2 abs r1 b0">
 				<svg class="w2em h2em" height="14px" version="1.1" viewBox="0 0 14 14" width="14px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.vidicon.org" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"><g fill="var(--color)" transform="translate(-215.000000, -257.000000)"><g transform="translate(215.000000, 257.000000)"><path d="M2,9 L0,9 L0,14 L5,14 L5,12 L2,12 L2,9 L2,9 Z M0,5 L2,5 L2,2 L5,2 L5,0 L0,0 L0,5 L0,5 Z M12,12 L9,12 L9,14 L14,14 L14,9 L12,9 L12,12 L12,12 Z M9,0 L9,2 L12,2 L12,5 L14,5 L14,0 L9,0 L9,0 Z"/></g></g></g></svg>
 			</span>
@@ -273,11 +274,10 @@
 			class="flex column-center-center z-index99 p2">
 			<div class="filled flex column-center-center mb2 maxw50pc">
 				<h1 
-					class="filled plr0-5 ptb0" 
-					style="font-size:6em">
+					class="filled plr0-5 f5 ptb0">
 					{title}
 				</h1>
-				<div class="filled f5 plr1 ptb0-5">{LIVE}</div>
+				<div class="mobile-hide filled f5 plr1 ptb0-5">{LIVE}</div>
 			</div>
 		</div>
 		<div 

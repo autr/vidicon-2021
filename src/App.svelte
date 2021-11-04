@@ -43,6 +43,7 @@
 	}
 
 	function onToggleChat(e) {
+		// https://go.rocket.chat/room?host=<chat.server>
 		let b = $chat ? _NOCHAT : _CHAT
 		window.localStorage.setItem(_CHAT, b)
 		$chat = getChat()
@@ -94,10 +95,10 @@
 
 	{#if $state.inited && $index <= 5 && $state.data}
 
-		<div class="flex column-center-center p1 grow w100pc">
+		<div class="flex column-center-center p1 grow w100pc make-column">
 			<div class="maxwidth flex column">
-				<header class="flex row-space-between-center monospace maxwidth no-basis grow ptb1 wrap">
-					<h1 class="flex maxw8em row-flex-start-center">
+				<header class="flex row-space-between-center monospace maxwidth no-basis grow ptb1 wrap make-column">
+					<h1 class="flex maxw8em row-flex-start-center overflow-hidden rel">
 						<a 
 							on:click={e => ($smoothing = 0.9)}
 							href="#">
@@ -106,10 +107,10 @@
 						</a>
 					</h1>
 
-					<nav class="flex no-basis grow row-flex-end-center maxwidth f3 monospace ptb1 z-index99">
+					<nav class="flex no-basis row-flex-start-center maxwidth f3 monospace ptb1 z-index99 make-row">
 						{#each ($data?.nav || []) as link, idx}
 							<a 
-								class="unclickable block whitespace-nowrap"
+								class="unclickable block whitespace-nowrap mtb0-5"
 								target={link?.url?.[0] == '#' ? '' : '_blank'}
 								href={link?.url}>{link?.title}</a>
 							<span class="block p0-2 mlr0-5 filled radius1em" />
@@ -118,6 +119,7 @@
 							class="pointer clickable b2-solid plr1"f
 							class:filled={$chat}
 							on:click={onToggleChat}>{_CHAT}</div>
+							<!-- https://go.rocket.chat/room?host=<chat.server> -->
 					</nav>
 				</header>
 				<article class="flex grow row-center-center" >
@@ -137,8 +139,8 @@
 					</div>
 				</article>
 
-				<footer class="flex no-basis grow row-space-between-center maxwidth f3 monospace ptb1 z-index99">
-					<div class="flex row-flex-start-center whitespace-nowrap">
+				<footer class="flex no-basis grow row-space-between-center maxwidth f3 monospace  z-index99 wrap ptb0-5 make-column make-reverse">
+					<div class="flex ptb0-5 row-flex-start-center wrap make-row">
 						{#each [...($data?.stations || []), { id: _PLAY, title: _PLAY}] as link, idx}
 							{#if idx != 0}
 								<span class="block p0-2 mlr0-5 filled radius1em" />
@@ -155,7 +157,8 @@
 							class:bb2-solid={$index == 5}
 							href="#{_PLAY}">{_PLAY}</a> -->
 					</div>
-					<div>
+					<span class="w2em h0em block" />
+					<div class="flex ptb0-5 row">
 						{LIVE}
 					</div>
 				</footer>
@@ -168,7 +171,7 @@
 		<div 
 			class:maxw56em={ $index < 6 }
 			class:bl2-solid={ $index < 6 }
-			class="flex grow  column" 
+			class="flex grow column" 
 			style="transform: skew(0deg, -0deg)">
 			<Chat>
 
@@ -192,4 +195,5 @@
 	{/if}
 
 </main>
+
 

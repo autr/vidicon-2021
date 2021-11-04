@@ -57488,111 +57488,106 @@ a.color-e, select.color-e, button.color-e, .button.color-e {
     flex-basis: 100%;
     max-width: 100%; } }
 
-html .fuzz, body .fuzz {
-  background: blue; }
-
-html .markdown p, html .markdown h1, html .markdown h2, html .markdown h3, html .markdown h4, html .markdown h5, html .markdown h6, html .markdown blockquote, html .markdown ul, html .markdown ol, body .markdown p, body .markdown h1, body .markdown h2, body .markdown h3, body .markdown h4, body .markdown h5, body .markdown h6, body .markdown blockquote, body .markdown ul, body .markdown ol {
-  padding-bottom: 1em; }
-
-html .markdown h1, html .markdown h2, html .markdown h3, html .markdown h4, html .markdown h5, html .markdown h6, body .markdown h1, body .markdown h2, body .markdown h3, body .markdown h4, body .markdown h5, body .markdown h6 {
-  text-transform: uppercase; }
-
-html .markdown a, body .markdown a {
-  border-bottom-width: 1px solid var(--color);
-  border-bottom-style: undefined; }
-
-html .markdown bold, html .markdown strong, body .markdown bold, body .markdown strong {
-  font-weight: bold; }
-
-html .markdown italic, html .markdown em, body .markdown italic, body .markdown em {
-  font-style: italic; }
+html, body {
+  background: var(--bg); }
+  @media only screen and (max-width: 980px) {
+    html, body {
+      --font-size: 12px; }
+      html body, html html, body body, body html {
+        overflow: hidden; }
+      html .mobile-hide, body .mobile-hide {
+        display: none; }
+      html .make-column, body .make-column {
+        flex-direction: column;
+        justify-content: flex-start;
+          justify-content-align-items: center; }
+      html .make-row, body .make-row {
+        flex-direction: row;
+        justify-content: center;
+          justify-content-align-items: center; }
+      html .make-reverse, body .make-reverse {
+        flex-direction: column-reverse; } }
+  html .fuzz, body .fuzz {
+    background: blue; }
+  html .markdown p, html .markdown h1, html .markdown h2, html .markdown h3, html .markdown h4, html .markdown h5, html .markdown h6, html .markdown blockquote, html .markdown ul, html .markdown ol, body .markdown p, body .markdown h1, body .markdown h2, body .markdown h3, body .markdown h4, body .markdown h5, body .markdown h6, body .markdown blockquote, body .markdown ul, body .markdown ol {
+    padding-bottom: 1em; }
+  html .markdown h1, html .markdown h2, html .markdown h3, html .markdown h4, html .markdown h5, html .markdown h6, body .markdown h1, body .markdown h2, body .markdown h3, body .markdown h4, body .markdown h5, body .markdown h6 {
+    text-transform: uppercase; }
+  html .markdown a, body .markdown a {
+    border-bottom-width: 1px solid var(--color);
+    border-bottom-style: undefined; }
+  html .markdown bold, html .markdown strong, body .markdown bold, body .markdown strong {
+    font-weight: bold; }
+  html .markdown italic, html .markdown em, body .markdown italic, body .markdown em {
+    font-style: italic; }
 
 @keyframes spin {
   from {
     transform: rotate(0deg); }
   to {
     transform: rotate(360deg); } }
-
-html .spin, body .spin {
-  animation: spin 3s infinite linear; }
-
-html .rad-and-cool *, body .rad-and-cool * {
-  stroke: transparent;
-  fill: var(--color); }
-
-html .container, body .container {
-  user-select: none; }
-
-html .videojs, body .videojs {
-  width: 100%;
-  height: 100%;
-  background: transparent; }
-  html .videojs video, body .videojs video {
-    background: transparent;
-    position: absolute;
+  html .spin, body .spin {
+    animation: spin 3s infinite linear; }
+  html .rad-and-cool *, body .rad-and-cool * {
+    stroke: transparent;
+    fill: var(--color); }
+  html .container, body .container {
+    user-select: none; }
+  html .videojs, body .videojs {
     width: 100%;
     height: 100%;
-    top: 0;
-    left: 0; }
-  html .videojs div, html .videojs button, body .videojs div, body .videojs button {
-    background: transparent;
+    background: transparent; }
+    html .videojs video, body .videojs video {
+      background: transparent;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0; }
+    html .videojs div, html .videojs button, body .videojs div, body .videojs button {
+      background: transparent;
+      display: none; }
+  html .maxwidth, body .maxwidth {
+    max-width: 1280px; }
+  html img, body img {
+    background: transparent; }
+  html *, body * {
+    -webkit-user-select: none; }
+  html #header, body #header {
+    -webkit-app-region: drag; }
+    html #header.electron, body #header.electron {
+      padding-left: 6em; }
+  html img, body img {
+    max-width: 100%; }
+    html img.export, body img.export {
+      background: white; }
+  html .palette canvas, body .palette canvas {
+    width: 100%;
+    max-width: 100%; }
+  html .file .overlay, body .file .overlay {
     display: none; }
-
-html .maxwidth, body .maxwidth {
-  max-width: 1280px; }
-
-html img, body img {
-  background: transparent; }
-
-html *, body * {
-  -webkit-user-select: none; }
-
-html #header, body #header {
-  -webkit-app-region: drag; }
-  html #header.electron, body #header.electron {
-    padding-left: 6em; }
-
-html img, body img {
-  max-width: 100%; }
-  html img.export, body img.export {
-    background: white; }
-
-html .palette canvas, body .palette canvas {
-  width: 100%;
-  max-width: 100%; }
-
-html .file .overlay, body .file .overlay {
-  display: none; }
-
-html .file:hover .overlay, body .file:hover .overlay {
-  display: flex; }
-
-html input, html .checker, html input[type=range], body input, body .checker, body input[type=range] {
-  background-repeat: repeat; }
-  html input::-webkit-slider-thumb, html .checker::-webkit-slider-thumb, html input[type=range]::-webkit-slider-thumb, body input::-webkit-slider-thumb, body .checker::-webkit-slider-thumb, body input[type=range]::-webkit-slider-thumb {
+  html .file:hover .overlay, body .file:hover .overlay {
+    display: flex; }
+  html input, html .checker, html input[type=range], body input, body .checker, body input[type=range] {
+    background-repeat: repeat; }
+    html input::-webkit-slider-thumb, html .checker::-webkit-slider-thumb, html input[type=range]::-webkit-slider-thumb, body input::-webkit-slider-thumb, body .checker::-webkit-slider-thumb, body input[type=range]::-webkit-slider-thumb {
+      background-color: var(--bg-pop); }
+  html button, html .select, body button, body .select {
     background-color: var(--bg-pop); }
-
-html button, html .select, body button, body .select {
-  background-color: var(--bg-pop); }
-
-html .swatch.metal, body .swatch.metal {
-  background: linear-gradient(140deg, rgba(0, 0, 0, 0) 20%, rgba(255, 255, 255, 0.1) 60%, rgba(0, 0, 0, 0.1) 75%, rgba(255, 255, 255, 0.2) 90%, rgba(0, 0, 0, 0) 120%); }
-
-html .checkered, body .checkered {
-  background-repeat: repeat; }
-
-html #canvases, body #canvases {
-  background-repeat: repeat; }
-  html #canvases *, body #canvases * {
-    image-rendering: pixelated; }
-
-html .palette-range, body .palette-range {
-  background-color: var(--bg);
-  background-image: linear-gradient(45deg, var(--bg-sink) 25%, transparent 25%, transparent 75%, var(--bg-sink) 75%, var(--bg-sink) 100%), linear-gradient(45deg, var(--bg-sink) 25%, transparent 25%, transparent 75%, var(--bg-sink) 75%, var(--bg-sink) 100%);
-  background-size: 8px 8px;
-  background-position: 0 0, 4px 4px; }
-
-html .grabbable, body .grabbable {
-  cursor: grab; }
-  html .grabbable:active, body .grabbable:active {
-    cursor: grabbing; }
+  html .swatch.metal, body .swatch.metal {
+    background: linear-gradient(140deg, rgba(0, 0, 0, 0) 20%, rgba(255, 255, 255, 0.1) 60%, rgba(0, 0, 0, 0.1) 75%, rgba(255, 255, 255, 0.2) 90%, rgba(0, 0, 0, 0) 120%); }
+  html .checkered, body .checkered {
+    background-repeat: repeat; }
+  html #canvases, body #canvases {
+    background-repeat: repeat; }
+    html #canvases *, body #canvases * {
+      image-rendering: pixelated; }
+  html .palette-range, body .palette-range {
+    background-color: var(--bg);
+    background-image: linear-gradient(45deg, var(--bg-sink) 25%, transparent 25%, transparent 75%, var(--bg-sink) 75%, var(--bg-sink) 100%), linear-gradient(45deg, var(--bg-sink) 25%, transparent 25%, transparent 75%, var(--bg-sink) 75%, var(--bg-sink) 100%);
+    background-size: 8px 8px;
+    background-position: 0 0, 4px 4px; }
+  html .grabbable, body .grabbable {
+    cursor: grab; }
+    html .grabbable:active, body .grabbable:active {
+      cursor: grabbing; }

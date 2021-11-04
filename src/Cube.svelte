@@ -65,7 +65,7 @@
 
 		// SPIN!!!!
 
-		isTweening = true
+		$state.isTweening = isTweening = true
 
 		// 45 - 225
 		current.x = normalise(current.x, 360)
@@ -241,7 +241,7 @@
 		DIMIT = ($index == 0 || $index == 5) ? 0.5 : 1
 		// if ($index < 0) $state.direction = BOTH
 
-		isPanning = true
+		$state.isPanning = isPanning = true
 		width = el.offsetWidth
 		height = el.offsetHeight
 		rotation.x = current.x
@@ -339,8 +339,8 @@
 		// }
 
 		$smoothing = 0.9
-		isTweening = true
-		isPanning = false
+		$state.isTweening = isTweening = true
+		$state.isPanning = isPanning = false
 
 		volume.set(1)
 

@@ -44,7 +44,24 @@
 
 html, body 
 
+	@media only screen and (max-width: 980px)
+		--font-size: 12px
+		body,html
+			overflow: hidden
+		.mobile-hide
+			display: none
+		.make-column
+			flex-direction: column
+			justify-content: flex-start
+		    align-items: center
+		.make-row
+			flex-direction: row
+			justify-content: center
+		    align-items: center
+		.make-reverse
+			flex-direction: column-reverse
 
+	background: var(--bg)
 	.fuzz
 		background: blue
 
