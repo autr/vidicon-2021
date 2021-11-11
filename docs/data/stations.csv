@@ -1,6 +1,6 @@
 title,id,src,poster,chat
-MAIN,MAIN,,,vidicon2020
-DIY-A,A,,,general
-DIY-B,B,,,meta_chat
+MAIN,MAIN,https://chat.scanlines.xyz/live/main.m3u8,,vidicon2020
+DIY-A,A,https://chat.scanlines.xyz/live/a.m3u8,,general
+DIY-B,B,https://chat.scanlines.xyz/live/b.m3u8,,meta_chat
 DIY-C,C,https://chat.scanlines.xyz/live/c.m3u8,,r_e_c_u_r
-DIY-D,D,,,code
+DIY-D,D,https://chat.scanlines.xyz/live/d.m3u8,,code
