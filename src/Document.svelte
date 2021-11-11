@@ -1,7 +1,6 @@
 <script>
 	import { onMount } from 'svelte'
-	import { All } from 'rad-and-cool-icons'
-	import { data, index, state, trigger } from './Store.js'
+	import { data, index, state, trigger, play_text, live } from './Store.js'
 
 	export let idx 
 	export let width
@@ -10,6 +9,8 @@
 
 	$: body = $data?.play || ''
 
+
+	$: LIVE = ($live || []).find( l => (l.id == $play_text) )?.message || ''
 
 	let lastIndex = -2
 
@@ -40,12 +41,12 @@
 		</div>
 		<div 
 			class:none={idx == $index}
-			class="flex row-center-center z-index99">
+			class="flex column-center-center z-index99">
 			<h1 
-				class="filled plr1 ptb0" 
-				style="font-size:6em">
-				PLAY
+				class="filled plr0-5 f5 ptb0">
+				{$play_text}
 			</h1>
+			<div class="mobile-hide filled f5 plr1 ptb0-5">{LIVE}</div>
 		</div>
 	</div>
 </section>

@@ -5,11 +5,10 @@
 	import Chat from './Chat.svelte'
 	import Station from './Station.svelte'
 	import Document from './Document.svelte'
-	import { index, state, data, chat, live, smoothing } from './Store.js'
+	import { index, state, data, chat, live, smoothing, play_text } from './Store.js'
 	export let name;
 
 
-	const _PLAY = 'PLAY'
 	const _CHAT = 'CHAT'
 	const _NOCHAT = 'NOCHAT'
 
@@ -26,9 +25,29 @@
 		$state.inited = true
 
 		getLiveInfo()
+		$play_text = ((await FetchLiveInfo())?.[5]?.id) || $play_text
+		getTimes()
 	})
 
-	$: HASHLIST = [...($data?.stations || []).map(s=>s.id),_PLAY,_CHAT]
+	let timeLocal, timeWest
+
+	function timezone() {
+		let t = ''
+		try {
+			t = new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1].replace( /[^A-Z]/g, '' )
+		} catch(err) {}
+		return t
+	}
+
+	async function getTimes() {
+		var a = new Date().toString().split(" ")
+		timeLocal = new Date().toLocaleTimeString().substring(0,5)
+		timeWest = new Date().toLocaleTimeString('en-GB', { timeZone: 'America/Los_Angeles' }).substring(0,5)
+		setTimeout( getTimes, 2000 )
+
+	}
+
+	$: HASHLIST = [...($data?.stations || []).map(s=>s.id),$play_text,_CHAT]
 
 	function onHash( e ) {
 		if (!$state.data) return
@@ -88,6 +107,9 @@
 	}
 
 
+
+
+
 </script>
 <svelte:window on:hashchange={onHash} />
 <main class="sassis flex row-center-stretch w100vw h100vh overflow-auto">
@@ -141,7 +163,7 @@
 
 				<footer class="flex no-basis grow row-space-between-center maxwidth f3 monospace  z-index99 wrap ptb0-5 make-column make-reverse">
 					<div class="flex ptb0-5 row-flex-start-center wrap make-row">
-						{#each [...($data?.stations || []), { id: _PLAY, title: _PLAY}] as link, idx}
+						{#each [...($data?.stations || []), { id: $play_text, title: $play_text}] as link, idx}
 							{#if idx != 0}
 								<span class="block p0-2 mlr0-5 filled radius1em" />
 							{/if}
@@ -155,11 +177,20 @@
 							on:click={e => ($smoothing = 0)}
 							class="unclickable whitespace-nowrap"
 							class:bb2-solid={$index == 5}
-							href="#{_PLAY}">{_PLAY}</a> -->
+							href="#{$play_text}">{$play_text}</a> -->
 					</div>
 					<span class="w2em h0em block" />
 					<div class="flex ptb0-5 row">
 						{LIVE}
+					</div>
+				</footer>
+				<footer class="flex row-space-between-center ptb0-5 monospace">
+					<div>
+						Powered by  
+						<a href="https://scanlines.xyz" class="bb2-solid ml0-5" target="_blank">scanlines.xyz</a>
+					</div>
+					<div>
+						{timezone()} {timeLocal} / PT {timeWest}
 					</div>
 				</footer>
 			</div>

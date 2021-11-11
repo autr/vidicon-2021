@@ -17,7 +17,7 @@
 	export let components = []
 
 	let rotation = {x:0,y:0,z:0}
-	let current = {x:0,y:0,z:0}
+	let current = {x:180,y:0,z:0}
 	let origin = {...current}
 	let destination = {...current}
 	let el, width, height // element dimensions
@@ -58,6 +58,7 @@
 	}
 
 	let lastIndex = -2
+	let lastWasBox = false
 
 	$: (_index => {
 
@@ -67,6 +68,7 @@
 
 		$state.isTweening = isTweening = true
 
+		let save = current.x
 		// 45 - 225
 		current.x = normalise(current.x, 360)
 		destination.x = normalise(destination.x, 360)
@@ -77,10 +79,9 @@
 		let top = { 5: 90, 0: -90 }
 		if (current.x > 45 && current.x < 225) top = { 5: -90, 0: 90 }
 
-		let x = !top[$index] ? ($index-1) * 90 : destination.x
+		let x = !top[$index] && $index != -1 ? ($index-1) * 90 : destination.x
 		let y = top[$index] || 0
 
-		// console.log('A', current.x, destination.x, x)
 
 		if (destination.x == 0 && x == 270) {
 			x = -90
@@ -93,6 +94,7 @@
 
 		if (x == 0 && current.x > 180) current.x = normalise(current.x, 180)
 		if (x == 360 && current.x < 180) current.x += 360
+
 
 		destination.x = x
 		destination.y = y
@@ -108,11 +110,15 @@
 
 		if (destination.x == 180 && destination.y == -90 && $index == 0) {
 			destination.y += 180
-		}
-
-		if (destination.x == 180 && destination.y == 90 && $index == 5) {
+		} else if (destination.x == 180 && destination.y == 90 && $index == 5) {
 			destination.y -= 180
 		}
+		// if ($index == -1) {
+		// 	console.log(save, current.x, '???')
+		// 	current.x = save
+		// }
+
+		lastWasBox = $index == -1
 
 
 		lastIndex = $index
@@ -148,7 +154,8 @@
 			zoomY = blend(zoomY, 1.5, $smoothing)
 			zoomZ = blend(zoomZ, 1, $smoothing)
 			let sp = 0.03
-			current.x -= sp * 1.8
+			if (!isPanning) current.x = (Math.sin(new Date() * 0.0004) * 20) + 180
+			if (!isPanning) current.y = (Math.sin(new Date() * 0.0003) * 10)
 			// current.y -= sp * 1
 			return window.requestAnimationFrame( tick )
 			
@@ -257,7 +264,7 @@
 		let speed = 2
 
 		let x = (deltaX * speed * 1.5) / width
-		let y = (Math.round(deltaY) * speed * 1 ) / height
+		let y = (Math.round(deltaY) * speed * 0.8 ) / height
 
 		// invert
 
@@ -302,6 +309,8 @@
 
 		current.x = normalise(current.x,180)
 		current.y = normalise(current.y,180)
+
+
 		destination.x = normalise(destination.x,180)
 		destination.y = normalise(destination.y,180)
 

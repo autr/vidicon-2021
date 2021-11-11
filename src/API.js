@@ -25,7 +25,7 @@ export const FetchData = async e => {
 	if (!w.data) {
 		w.data = {}
 		for (let source of sources) {
-			const url = `data/${source}.csv`
+			const url = `data/${source}.csv?time=${parseInt((new Date())/1000)}`
 			try {
 				w.data[source] = await CsvToJson().fromString( await (await fetch(url)).text() )
 				console.log(`[API] ✅  grabbed ${url}`, w[source])
@@ -36,7 +36,7 @@ export const FetchData = async e => {
 			}
 		}
 		for (let doc of documents) {
-			const url = `data/${doc}.md`
+			const url = `data/${doc}.md?time=${parseInt((new Date())/1000)}`
 			try {
 				w.data[doc] = await marked.parse( await (await fetch(url)).text() )
 				console.log(`[API] ✅  grabbed ${url}`, w[doc])

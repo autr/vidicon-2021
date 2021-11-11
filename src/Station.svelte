@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte'
-	import { All } from 'rad-and-cool-icons'
-	import { data, index, state, trigger, volume, live } from './Store.js'
+	import All from 'rad-and-cool-icons'
+	import { data, index, state, trigger, volume, live, play_text } from './Store.js'
 
 	export let idx 
 	export let width

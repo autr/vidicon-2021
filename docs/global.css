@@ -15,7 +15,7 @@
   --bg-sink: hsl( 200, 10%, 85% ); }
 
 :root {
-  --bg: hsl( 200, 10%, 7% );
+  --bg: hsl( 200, 10%, 1% );
   --bg-pop: hsl( 200, 10%, 12% );
   --bg-sink: hsl( 200, 10%, 2% );
   --color: hsl( 200, 10%, 90% );
@@ -297,7 +297,7 @@ input[type=range] {
   padding-top: 0px;
   padding-bottom: 0px; }
   .checkbox span, .radio span {
-    border-width: 1px;
+    border-width: var(--stroke-width);
     margin: var(--input-padding);
     margin-left: 0em;
     margin-top: 0em;
@@ -57489,7 +57489,11 @@ a.color-e, select.color-e, button.color-e, .button.color-e {
     max-width: 100%; } }
 
 html, body {
-  background: var(--bg); }
+  background-color: var(--bg);
+  background-image: url("pix.png");
+  background-repeat: repeat; }
+  html .sassis, body .sassis {
+    background: none !important; }
   @media only screen and (max-width: 980px) {
     html, body {
       --font-size: 12px; }
