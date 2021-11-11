@@ -1,11 +1,7 @@
-# Stream to OBS
+# Stream to Vidicon DIY Stations
 
-These are instructions for streaming to OBS.
+Anyone is welcome to stream to the Vidicon DIY cube screens. Please be mindful of other performers, and ask if someone else is streaming. 
 
-Which are formatted in markdown, ie.
+Streaming uses OBS, and will be broadcast on the cubes.
 
-* Step 1: get a computer
-* Step 2: download OBS
-* Step 3: etc
-
-Also, we can do [links](https://vidicon.org) __and__ _formatting_ like so.
+Please see the [Streaming Instructions](https://docs.google.com/document/d/15jvyM5PBKHFiE8r_1TEaxLzRij-5cl-HJ-UtN1xpjGw/edit?usp=sharing) here.
