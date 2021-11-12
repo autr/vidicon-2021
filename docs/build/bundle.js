@@ -3659,12 +3659,12 @@ var app = (function () {
 
     function get_each_context$6(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[49] = list[i];
-    	child_ctx[51] = i;
+    	child_ctx[50] = list[i];
+    	child_ctx[52] = i;
     	return child_ctx;
     }
 
-    // (440:0) {#if DEBUG}
+    // (444:0) {#if DEBUG}
     function create_if_block_1$2(ctx) {
     	let span24;
     	let span0;
@@ -3883,32 +3883,32 @@ var app = (function () {
     			span23 = element("span");
     			t69 = text("zoomRatio:");
     			t70 = text(t70_value);
-    			add_location(span0, file$d, 441, 2, 9927);
-    			add_location(span1, file$d, 442, 2, 9957);
-    			add_location(span2, file$d, 443, 2, 10005);
-    			add_location(span3, file$d, 444, 2, 10053);
-    			add_location(span4, file$d, 445, 2, 10101);
-    			add_location(span5, file$d, 446, 2, 10157);
-    			add_location(span6, file$d, 447, 2, 10213);
-    			add_location(span7, file$d, 448, 2, 10269);
-    			add_location(span8, file$d, 449, 2, 10315);
-    			add_location(span9, file$d, 450, 2, 10361);
-    			add_location(span10, file$d, 451, 2, 10407);
-    			add_location(span11, file$d, 452, 2, 10447);
-    			add_location(span12, file$d, 453, 2, 10487);
-    			add_location(span13, file$d, 454, 2, 10527);
-    			add_location(span14, file$d, 455, 2, 10565);
-    			add_location(span15, file$d, 456, 2, 10603);
-    			add_location(span16, file$d, 457, 2, 10642);
-    			add_location(span17, file$d, 458, 2, 10683);
-    			add_location(span18, file$d, 459, 2, 10713);
-    			add_location(span19, file$d, 460, 2, 10751);
-    			add_location(span20, file$d, 461, 2, 10802);
-    			add_location(span21, file$d, 462, 2, 10842);
-    			add_location(span22, file$d, 463, 2, 10882);
-    			add_location(span23, file$d, 464, 2, 10922);
+    			add_location(span0, file$d, 445, 2, 9974);
+    			add_location(span1, file$d, 446, 2, 10004);
+    			add_location(span2, file$d, 447, 2, 10052);
+    			add_location(span3, file$d, 448, 2, 10100);
+    			add_location(span4, file$d, 449, 2, 10148);
+    			add_location(span5, file$d, 450, 2, 10204);
+    			add_location(span6, file$d, 451, 2, 10260);
+    			add_location(span7, file$d, 452, 2, 10316);
+    			add_location(span8, file$d, 453, 2, 10362);
+    			add_location(span9, file$d, 454, 2, 10408);
+    			add_location(span10, file$d, 455, 2, 10454);
+    			add_location(span11, file$d, 456, 2, 10494);
+    			add_location(span12, file$d, 457, 2, 10534);
+    			add_location(span13, file$d, 458, 2, 10574);
+    			add_location(span14, file$d, 459, 2, 10612);
+    			add_location(span15, file$d, 460, 2, 10650);
+    			add_location(span16, file$d, 461, 2, 10689);
+    			add_location(span17, file$d, 462, 2, 10730);
+    			add_location(span18, file$d, 463, 2, 10760);
+    			add_location(span19, file$d, 464, 2, 10798);
+    			add_location(span20, file$d, 465, 2, 10849);
+    			add_location(span21, file$d, 466, 2, 10889);
+    			add_location(span22, file$d, 467, 2, 10929);
+    			add_location(span23, file$d, 468, 2, 10969);
     			attr_dev(span24, "class", "fixed r0 t0 z-index9 r0 flex column filled p1 monospace");
-    			add_location(span24, file$d, 440, 1, 9854);
+    			add_location(span24, file$d, 444, 1, 9901);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span24, anchor);
@@ -4043,14 +4043,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1$2.name,
     		type: "if",
-    		source: "(440:0) {#if DEBUG}",
+    		source: "(444:0) {#if DEBUG}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (527:7) {:else}
+    // (531:7) {:else}
     function create_else_block$3(ctx) {
     	let div1;
     	let h1;
@@ -4067,21 +4067,21 @@ var app = (function () {
     			div1 = element("div");
     			h1 = element("h1");
     			t0 = text("COMPONENT ");
-    			t1 = text(/*i*/ ctx[51]);
+    			t1 = text(/*i*/ ctx[52]);
     			t2 = space();
     			div0 = element("div");
     			div0.textContent = "HELLO WORLD";
     			t4 = space();
     			img = element("img");
     			attr_dev(h1, "class", "filled plr1");
-    			add_location(h1, file$d, 528, 9, 13474);
+    			add_location(h1, file$d, 532, 9, 13521);
     			attr_dev(div0, "class", "filled plr1");
-    			add_location(div0, file$d, 529, 9, 13526);
-    			if (!src_url_equal(img.src, img_src_value = "data/demo" + (/*i*/ ctx[51] + 1) + ".png")) attr_dev(img, "src", img_src_value);
+    			add_location(div0, file$d, 533, 9, 13573);
+    			if (!src_url_equal(img.src, img_src_value = "data/demo" + (/*i*/ ctx[52] + 1) + ".png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "class", "w30pc");
-    			add_location(img, file$d, 530, 9, 13578);
+    			add_location(img, file$d, 534, 9, 13625);
     			attr_dev(div1, "class", "flex column-center-center");
-    			add_location(div1, file$d, 527, 8, 13425);
+    			add_location(div1, file$d, 531, 8, 13472);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -4105,25 +4105,25 @@ var app = (function () {
     		block,
     		id: create_else_block$3.name,
     		type: "else",
-    		source: "(527:7) {:else}",
+    		source: "(531:7) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (520:7) {#if components[i]}
+    // (524:7) {#if components[i]}
     function create_if_block$5(ctx) {
     	let switch_instance;
     	let switch_instance_anchor;
     	let current;
-    	var switch_value = /*components*/ ctx[0][/*i*/ ctx[51]];
+    	var switch_value = /*components*/ ctx[0][/*i*/ ctx[52]];
 
     	function switch_props(ctx) {
     		return {
     			props: {
-    				idx: /*i*/ ctx[51],
-    				stretch: /*isEnds*/ ctx[24](/*i*/ ctx[51]),
+    				idx: /*i*/ ctx[52],
+    				stretch: /*isEnds*/ ctx[24](/*i*/ ctx[52]),
     				width: /*width*/ ctx[3],
     				height: /*height*/ ctx[4]
     			},
@@ -4153,7 +4153,7 @@ var app = (function () {
     			if (dirty[0] & /*width*/ 8) switch_instance_changes.width = /*width*/ ctx[3];
     			if (dirty[0] & /*height*/ 16) switch_instance_changes.height = /*height*/ ctx[4];
 
-    			if (switch_value !== (switch_value = /*components*/ ctx[0][/*i*/ ctx[51]])) {
+    			if (switch_value !== (switch_value = /*components*/ ctx[0][/*i*/ ctx[52]])) {
     				if (switch_instance) {
     					group_outros();
     					const old_component = switch_instance;
@@ -4196,14 +4196,14 @@ var app = (function () {
     		block,
     		id: create_if_block$5.name,
     		type: "if",
-    		source: "(520:7) {#if components[i]}",
+    		source: "(524:7) {#if components[i]}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (508:3) {#each (new Array(6)) as n, i }
+    // (512:3) {#each (new Array(6)) as n, i }
     function create_each_block$6(ctx) {
     	let div0;
     	let div0_style_value;
@@ -4219,7 +4219,7 @@ var app = (function () {
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
-    		if (/*components*/ ctx[0][/*i*/ ctx[51]]) return 0;
+    		if (/*components*/ ctx[0][/*i*/ ctx[52]]) return 0;
     		return 1;
     	}
 
@@ -4234,17 +4234,17 @@ var app = (function () {
     			div1 = element("div");
     			if_block.c();
     			t1 = space();
-    			attr_dev(div0, "style", div0_style_value = /*faces*/ ctx[19][/*i*/ ctx[51]]);
+    			attr_dev(div0, "style", div0_style_value = /*faces*/ ctx[19][/*i*/ ctx[52]]);
     			attr_dev(div0, "class", "face fill flex row-center-center fuzz");
-    			toggle_class(div0, "none", /*i*/ ctx[51] != /*$index*/ ctx[14]);
+    			toggle_class(div0, "none", /*i*/ ctx[52] != /*$index*/ ctx[14]);
     			toggle_class(div0, "b8-solid", /*$state*/ ctx[15].mousedown);
     			toggle_class(div0, "b4-solid", !/*$state*/ ctx[15].mousedown);
-    			add_location(div0, file$d, 508, 4, 12864);
+    			add_location(div0, file$d, 512, 4, 12911);
     			attr_dev(div1, "class", "inner monospace flex fill column-center-center rel");
-    			add_location(div1, file$d, 517, 6, 13159);
-    			attr_dev(div2, "style", div2_style_value = /*faces*/ ctx[19][/*i*/ ctx[51]] + /*rotateStyle*/ ctx[20](/*i*/ ctx[51]));
+    			add_location(div1, file$d, 521, 6, 13206);
+    			attr_dev(div2, "style", div2_style_value = /*faces*/ ctx[19][/*i*/ ctx[52]] + /*rotateStyle*/ ctx[20](/*i*/ ctx[52]));
     			attr_dev(div2, "class", "face fill flex row-center-center");
-    			add_location(div2, file$d, 514, 4, 13060);
+    			add_location(div2, file$d, 518, 4, 13107);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -4256,12 +4256,12 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (!current || dirty[0] & /*faces*/ 524288 && div0_style_value !== (div0_style_value = /*faces*/ ctx[19][/*i*/ ctx[51]])) {
+    			if (!current || dirty[0] & /*faces*/ 524288 && div0_style_value !== (div0_style_value = /*faces*/ ctx[19][/*i*/ ctx[52]])) {
     				attr_dev(div0, "style", div0_style_value);
     			}
 
     			if (dirty[0] & /*$index*/ 16384) {
-    				toggle_class(div0, "none", /*i*/ ctx[51] != /*$index*/ ctx[14]);
+    				toggle_class(div0, "none", /*i*/ ctx[52] != /*$index*/ ctx[14]);
     			}
 
     			if (dirty[0] & /*$state*/ 32768) {
@@ -4298,7 +4298,7 @@ var app = (function () {
     				if_block.m(div1, null);
     			}
 
-    			if (!current || dirty[0] & /*faces, rotateStyle*/ 1572864 && div2_style_value !== (div2_style_value = /*faces*/ ctx[19][/*i*/ ctx[51]] + /*rotateStyle*/ ctx[20](/*i*/ ctx[51]))) {
+    			if (!current || dirty[0] & /*faces, rotateStyle*/ 1572864 && div2_style_value !== (div2_style_value = /*faces*/ ctx[19][/*i*/ ctx[52]] + /*rotateStyle*/ ctx[20](/*i*/ ctx[52]))) {
     				attr_dev(div2, "style", div2_style_value);
     			}
     		},
@@ -4323,7 +4323,7 @@ var app = (function () {
     		block,
     		id: create_each_block$6.name,
     		type: "each",
-    		source: "(508:3) {#each (new Array(6)) as n, i }",
+    		source: "(512:3) {#each (new Array(6)) as n, i }",
     		ctx
     	});
 
@@ -4365,15 +4365,15 @@ var app = (function () {
 
     			attr_dev(div0, "style", /*box*/ ctx[21]);
     			attr_dev(div0, "class", "box h100pc rel");
-    			add_location(div0, file$d, 503, 2, 12722);
+    			add_location(div0, file$d, 507, 2, 12769);
     			attr_dev(div1, "style", /*container*/ ctx[22]);
     			attr_dev(div1, "class", "container fill rel");
-    			add_location(div1, file$d, 499, 1, 12647);
+    			add_location(div1, file$d, 503, 1, 12694);
     			attr_dev(div2, "class", "zoom fill");
     			set_style(div2, "transform", "scale(" + /*zoom*/ ctx[10] + ", " + /*squish*/ ctx[18] + ")");
     			set_style(div2, "transform-origin", "50% 50%");
     			toggle_class(div2, "invisible", !/*$state*/ ctx[15].cubeInited);
-    			add_location(div2, file$d, 495, 0, 12511);
+    			add_location(div2, file$d, 499, 0, 12558);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -4389,7 +4389,7 @@ var app = (function () {
     				each_blocks[i].m(div0, null);
     			}
 
-    			/*div1_binding*/ ctx[36](div1);
+    			/*div1_binding*/ ctx[37](div1);
     			current = true;
 
     			if (!mounted) {
@@ -4474,7 +4474,7 @@ var app = (function () {
     			if (detaching) detach_dev(t);
     			if (detaching) detach_dev(div2);
     			destroy_each(each_blocks, detaching);
-    			/*div1_binding*/ ctx[36](null);
+    			/*div1_binding*/ ctx[37](null);
     			mounted = false;
     			run_all(dispose);
     		}
@@ -4545,12 +4545,15 @@ var app = (function () {
     	let $index;
     	let $state;
     	let $smoothing;
+    	let $chat;
     	validate_store(index, 'index');
     	component_subscribe($$self, index, $$value => $$invalidate(14, $index = $$value));
     	validate_store(state, 'state');
     	component_subscribe($$self, state, $$value => $$invalidate(15, $state = $$value));
     	validate_store(smoothing, 'smoothing');
-    	component_subscribe($$self, smoothing, $$value => $$invalidate(41, $smoothing = $$value));
+    	component_subscribe($$self, smoothing, $$value => $$invalidate(42, $smoothing = $$value));
+    	validate_store(chat, 'chat');
+    	component_subscribe($$self, chat, $$value => $$invalidate(36, $chat = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Cube', slots, []);
     	let DEBUG = window.location.search == '?debug';
@@ -4778,6 +4781,7 @@ var app = (function () {
     		smoothing,
     		trigger,
     		volume,
+    		chat,
     		onMount,
     		pan: bundle.pan,
     		tweened,
@@ -4839,7 +4843,8 @@ var app = (function () {
     		ends,
     		$index,
     		$state,
-    		$smoothing
+    		$smoothing,
+    		$chat
     	});
 
     	$$self.$inject_state = $$props => {
@@ -4888,6 +4893,12 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
+    		if ($$self.$$.dirty[1] & /*$chat*/ 32) {
+    			(_chat => {
+    				onResize();
+    			})();
+    		}
+
     		if ($$self.$$.dirty[0] & /*$state, $index, current, destination*/ 49158 | $$self.$$.dirty[1] & /*lastIndex*/ 4) {
     			(_index => {
     				if (!$state.inited || lastIndex == $index) return;
@@ -5081,6 +5092,7 @@ var app = (function () {
     		lastIndex,
     		o,
     		resizeStyle,
+    		$chat,
     		div1_binding
     	];
     }
@@ -5128,12 +5140,12 @@ var app = (function () {
 
     function get_each_context$5(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[6] = list[i];
-    	child_ctx[8] = i;
+    	child_ctx[7] = list[i];
+    	child_ctx[9] = i;
     	return child_ctx;
     }
 
-    // (14:3) {#if stations?.[idx]?.chat}
+    // (28:3) {#if links?.[idx]}
     function create_if_block$4(ctx) {
     	let iframe;
     	let iframe_src_value;
@@ -5145,14 +5157,14 @@ var app = (function () {
     			set_style(iframe, "height", "calc(100% + 120px)");
     			set_style(iframe, "top", "auto");
     			set_style(iframe, "bottom", "0");
-    			if (!src_url_equal(iframe.src, iframe_src_value = "https://chat.scanlines.xyz/channel/" + /*stations*/ ctx[1]?.[/*idx*/ ctx[0]]?.chat + "?layout=embedded")) attr_dev(iframe, "src", iframe_src_value);
-    			add_location(iframe, file$c, 14, 4, 302);
+    			if (!src_url_equal(iframe.src, iframe_src_value = "https://chat.scanlines.xyz/channel/" + /*links*/ ctx[2]?.[/*idx*/ ctx[0]] + "?layout=embedded")) attr_dev(iframe, "src", iframe_src_value);
+    			add_location(iframe, file$c, 28, 4, 488);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, iframe, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*stations, idx*/ 3 && !src_url_equal(iframe.src, iframe_src_value = "https://chat.scanlines.xyz/channel/" + /*stations*/ ctx[1]?.[/*idx*/ ctx[0]]?.chat + "?layout=embedded")) {
+    			if (dirty & /*links, idx*/ 5 && !src_url_equal(iframe.src, iframe_src_value = "https://chat.scanlines.xyz/channel/" + /*links*/ ctx[2]?.[/*idx*/ ctx[0]] + "?layout=embedded")) {
     				attr_dev(iframe, "src", iframe_src_value);
     			}
     		},
@@ -5165,26 +5177,26 @@ var app = (function () {
     		block,
     		id: create_if_block$4.name,
     		type: "if",
-    		source: "(14:3) {#if stations?.[idx]?.chat}",
+    		source: "(28:3) {#if links?.[idx]}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (25:3) {#each stations as station, i}
+    // (39:3) {#each links as link, i}
     function create_each_block$5(ctx) {
     	let span;
     	let t0;
     	let div;
-    	let t1_value = /*station*/ ctx[6].title + "";
+    	let t1_value = /*lookup*/ ctx[1][/*link*/ ctx[7]] + "";
     	let t1;
     	let t2;
     	let mounted;
     	let dispose;
 
     	function click_handler(...args) {
-    		return /*click_handler*/ ctx[5](/*i*/ ctx[8], ...args);
+    		return /*click_handler*/ ctx[6](/*i*/ ctx[9], ...args);
     	}
 
     	const block = {
@@ -5195,11 +5207,11 @@ var app = (function () {
     			t1 = text(t1_value);
     			t2 = space();
     			attr_dev(span, "class", "block p0-2 mlr0-5 filled radius1em");
-    			toggle_class(span, "none", /*i*/ ctx[8] == 0);
-    			add_location(span, file$c, 25, 4, 683);
+    			toggle_class(span, "none", /*i*/ ctx[9] == 0);
+    			add_location(span, file$c, 39, 4, 854);
     			attr_dev(div, "class", "pointer block whitespace-nowrap");
-    			toggle_class(div, "bb4-solid", /*i*/ ctx[8] == /*idx*/ ctx[0]);
-    			add_location(div, file$c, 28, 4, 768);
+    			toggle_class(div, "bb4-solid", /*i*/ ctx[9] == /*idx*/ ctx[0]);
+    			add_location(div, file$c, 42, 4, 939);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -5215,10 +5227,10 @@ var app = (function () {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty & /*stations*/ 2 && t1_value !== (t1_value = /*station*/ ctx[6].title + "")) set_data_dev(t1, t1_value);
+    			if (dirty & /*lookup, links*/ 6 && t1_value !== (t1_value = /*lookup*/ ctx[1][/*link*/ ctx[7]] + "")) set_data_dev(t1, t1_value);
 
     			if (dirty & /*idx*/ 1) {
-    				toggle_class(div, "bb4-solid", /*i*/ ctx[8] == /*idx*/ ctx[0]);
+    				toggle_class(div, "bb4-solid", /*i*/ ctx[9] == /*idx*/ ctx[0]);
     			}
     		},
     		d: function destroy(detaching) {
@@ -5234,7 +5246,7 @@ var app = (function () {
     		block,
     		id: create_each_block$5.name,
     		type: "each",
-    		source: "(25:3) {#each stations as station, i}",
+    		source: "(39:3) {#each links as link, i}",
     		ctx
     	});
 
@@ -5250,8 +5262,8 @@ var app = (function () {
     	let div1;
     	let t1;
     	let current;
-    	let if_block = /*stations*/ ctx[1]?.[/*idx*/ ctx[0]]?.chat && create_if_block$4(ctx);
-    	let each_value = /*stations*/ ctx[1];
+    	let if_block = /*links*/ ctx[2]?.[/*idx*/ ctx[0]] && create_if_block$4(ctx);
+    	let each_value = /*links*/ ctx[2];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -5259,8 +5271,8 @@ var app = (function () {
     		each_blocks[i] = create_each_block$5(get_each_context$5(ctx, each_value, i));
     	}
 
-    	const default_slot_template = /*#slots*/ ctx[4].default;
-    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[3], null);
+    	const default_slot_template = /*#slots*/ ctx[5].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[4], null);
 
     	const block = {
     		c: function create() {
@@ -5279,16 +5291,16 @@ var app = (function () {
     			t1 = space();
     			if (default_slot) default_slot.c();
     			attr_dev(section, "class", "flex grow rel");
-    			add_location(section, file$c, 11, 2, 234);
+    			add_location(section, file$c, 25, 2, 429);
     			attr_dev(div0, "class", "flex grow p0-5 rel overflow-hidden");
-    			add_location(div0, file$c, 10, 1, 182);
+    			add_location(div0, file$c, 24, 1, 377);
     			attr_dev(div1, "class", "flex row-center-center");
-    			add_location(div1, file$c, 23, 2, 608);
+    			add_location(div1, file$c, 37, 2, 785);
     			attr_dev(nav, "class", "flex row-space-between-center f2 monospace uppercase p1 bt2-solid");
-    			add_location(nav, file$c, 22, 1, 526);
-    			attr_dev(div2, "class", "flex column h100pc");
+    			add_location(nav, file$c, 36, 1, 703);
+    			attr_dev(div2, "class", "flex column h100pc minw32em");
     			set_style(div2, "background", "#1f2329");
-    			add_location(div2, file$c, 9, 0, 121);
+    			add_location(div2, file$c, 23, 0, 307);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -5315,7 +5327,7 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
-    			if (/*stations*/ ctx[1]?.[/*idx*/ ctx[0]]?.chat) {
+    			if (/*links*/ ctx[2]?.[/*idx*/ ctx[0]]) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
@@ -5328,8 +5340,8 @@ var app = (function () {
     				if_block = null;
     			}
 
-    			if (dirty & /*idx, stations*/ 3) {
-    				each_value = /*stations*/ ctx[1];
+    			if (dirty & /*idx, lookup, links*/ 7) {
+    				each_value = /*links*/ ctx[2];
     				validate_each_argument(each_value);
     				let i;
 
@@ -5353,15 +5365,15 @@ var app = (function () {
     			}
 
     			if (default_slot) {
-    				if (default_slot.p && (!current || dirty & /*$$scope*/ 8)) {
+    				if (default_slot.p && (!current || dirty & /*$$scope*/ 16)) {
     					update_slot_base(
     						default_slot,
     						default_slot_template,
     						ctx,
-    						/*$$scope*/ ctx[3],
+    						/*$$scope*/ ctx[4],
     						!current
-    						? get_all_dirty_from_scope(/*$$scope*/ ctx[3])
-    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[3], dirty, null),
+    						? get_all_dirty_from_scope(/*$$scope*/ ctx[4])
+    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[4], dirty, null),
     						null
     					);
     				}
@@ -5396,13 +5408,14 @@ var app = (function () {
     }
 
     function instance$c($$self, $$props, $$invalidate) {
-    	let stations;
+    	let links;
     	let $data;
     	validate_store(data, 'data');
-    	component_subscribe($$self, data, $$value => $$invalidate(2, $data = $$value));
+    	component_subscribe($$self, data, $$value => $$invalidate(3, $data = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Chat', slots, ['default']);
     	let { idx = 0 } = $$props;
+    	let lookup = {};
     	const writable_props = ['idx'];
 
     	Object.keys($$props).forEach(key => {
@@ -5413,14 +5426,15 @@ var app = (function () {
 
     	$$self.$$set = $$props => {
     		if ('idx' in $$props) $$invalidate(0, idx = $$props.idx);
-    		if ('$$scope' in $$props) $$invalidate(3, $$scope = $$props.$$scope);
+    		if ('$$scope' in $$props) $$invalidate(4, $$scope = $$props.$$scope);
     	};
 
-    	$$self.$capture_state = () => ({ data, chat, idx, stations, $data });
+    	$$self.$capture_state = () => ({ data, chat, idx, lookup, links, $data });
 
     	$$self.$inject_state = $$props => {
     		if ('idx' in $$props) $$invalidate(0, idx = $$props.idx);
-    		if ('stations' in $$props) $$invalidate(1, stations = $$props.stations);
+    		if ('lookup' in $$props) $$invalidate(1, lookup = $$props.lookup);
+    		if ('links' in $$props) $$invalidate(2, links = $$props.links);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -5428,12 +5442,23 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*$data*/ 4) {
-    			$$invalidate(1, stations = $data?.stations || []);
+    		if ($$self.$$.dirty & /*$data*/ 8) {
+    			$$invalidate(2, links = (stations => {
+    				let a = [];
+
+    				(stations || []).forEach(s => {
+    					if (a.indexOf(s.chat) == -1) {
+    						a.push(s.chat);
+    						$$invalidate(1, lookup[s.chat] = s.group, lookup);
+    					}
+    				});
+
+    				return a;
+    			})($data?.stations));
     		}
     	};
 
-    	return [idx, stations, $data, $$scope, slots, click_handler];
+    	return [idx, lookup, links, $data, $$scope, slots, click_handler];
     }
 
     class Chat extends SvelteComponentDev {
@@ -11349,15 +11374,15 @@ var app = (function () {
     			t3 = text(/*LIVE*/ ctx[6]);
     			attr_dev(div0, "class", "flex column-center-center z-index99 markdown");
     			toggle_class(div0, "none", /*idx*/ ctx[0] != /*$index*/ ctx[4]);
-    			add_location(div0, file$1, 36, 2, 758);
+    			add_location(div0, file$1, 36, 2, 795);
     			attr_dev(h1, "class", "filled plr0-5 f5 ptb0");
-    			add_location(h1, file$1, 44, 3, 965);
+    			add_location(h1, file$1, 44, 3, 1002);
     			attr_dev(div1, "class", "mobile-hide filled f5 plr1 ptb0-5");
-    			add_location(div1, file$1, 48, 3, 1034);
+    			add_location(div1, file$1, 48, 3, 1071);
     			attr_dev(div2, "class", "flex column-center-center z-index99");
     			toggle_class(div2, "none", /*idx*/ ctx[0] == /*$index*/ ctx[4]);
-    			add_location(div2, file$1, 41, 2, 878);
-    			attr_dev(div3, "class", "flex column-center-center grow");
+    			add_location(div2, file$1, 41, 2, 915);
+    			attr_dev(div3, "class", "flex column-center-center grow maxw22em mobile-100 plr1 text-center");
     			set_style(div3, "height", /*height*/ ctx[2] + "px");
 
     			set_style(div3, "transform", "scale(1," + (/*stretch*/ ctx[3]

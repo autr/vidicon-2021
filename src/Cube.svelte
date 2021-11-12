@@ -1,5 +1,5 @@
 <script>
-	import { index, state, smoothing, trigger, volume } from './Store.js'
+	import { index, state, smoothing, trigger, volume, chat } from './Store.js'
 	import { onMount } from 'svelte'
 	import { pan } from 'svelte-hammer'
 	import { tweened } from 'svelte/motion'
@@ -47,6 +47,10 @@
 		if (v > max) return max
 		return v
 	}
+
+	$: (_chat => {
+		onResize()
+	})($chat)
 
 
 	function same( a, b ) {

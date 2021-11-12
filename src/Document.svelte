@@ -31,7 +31,7 @@
 </script>
 <section class="fill flex row-center-center ">
 	<div 
-		class="flex column-center-center grow"
+		class="flex column-center-center grow maxw22em mobile-100 plr1 text-center"
 		class:b2-solid={!stretch}
 		style="height:{height}px;transform:scale(1,{stretch ? width/height : 1});">
 		<div 

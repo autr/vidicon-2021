@@ -15,7 +15,7 @@
   --bg-sink: hsl( 200, 10%, 85% ); }
 
 :root {
-  --bg: hsl( 200, 10%, 1% );
+  --bg: hsl( 200, 10%, 7% );
   --bg-pop: hsl( 200, 10%, 12% );
   --bg-sink: hsl( 200, 10%, 2% );
   --color: hsl( 200, 10%, 90% );
@@ -57510,7 +57510,9 @@ html, body {
         justify-content: center;
           justify-content-align-items: center; }
       html .make-reverse, body .make-reverse {
-        flex-direction: column-reverse; } }
+        flex-direction: column-reverse; }
+      html .mobile-100, body .mobile-100 {
+        max-width: 100% !important; } }
   html .fuzz, body .fuzz {
     background: blue; }
   html .markdown p, html .markdown h1, html .markdown h2, html .markdown h3, html .markdown h4, html .markdown h5, html .markdown h6, html .markdown blockquote, html .markdown ul, html .markdown ol, body .markdown p, body .markdown h1, body .markdown h2, body .markdown h3, body .markdown h4, body .markdown h5, body .markdown h6, body .markdown blockquote, body .markdown ul, body .markdown ol {
