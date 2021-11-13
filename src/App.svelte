@@ -181,13 +181,18 @@
 					</div>
 					<span class="w2em h0em block" />
 					<div class="flex ptb0-5 row">
-						{LIVE}
+						{#if $index == 5}
+							<a href="https://docs.google.com/document/u/0/d/15jvyM5PBKHFiE8r_1TEaxLzRij-5cl-HJ-UtN1xpjGw/mobilebasic" target="_blank" class="bb2-solid">Open Instructions ⮕</a>
+						{:else}
+
+							{LIVE}
+						{/if}
 					</div>
 				</footer>
 				<footer class="flex row-space-between-center ptb0-5 monospace">
 					<div>
 						Powered by  
-						<a href="https://scanlines.xyz" class="bb2-solid ml0-5" target="_blank">scanlines.xyz</a>
+						<a href="https://scanlines.xyz" class="bb2-solid " target="_blank">scanlines.xyz</a>
 					</div>
 					<div>
 						{timezone()} {timeLocal} / PT {timeWest}
